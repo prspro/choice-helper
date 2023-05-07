@@ -1,7 +1,9 @@
+import ChoiceList from "./components/ChoiceList";
+
 function App() {
   return (
     <div>
-      Choise helper
+      <ChoiceList />
     </div>
   );
 }
