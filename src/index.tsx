@@ -1,15 +1,18 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
+import React from "react";
+import { createRoot } from "react-dom/client";
 // import { Provider } from 'react-redux';
-import App from './App';
+import App from "./App";
 import "normalize.css";
 import "./index.sass";
+import { BrowserRouter as Router } from "react-router-dom";
 
-const container = document.getElementById('root')!;
+const container = document.getElementById("root")!;
 const root = createRoot(container);
 
 root.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <App />
+    </Router>
   </React.StrictMode>
 );
