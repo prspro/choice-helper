@@ -21,6 +21,38 @@ const initialState: { list: IChoiceThemeData[] } = {
         {id: "0", value: "value3"},
         {id: "1", value: "value4"},
       ]
+    },
+    {
+      id: "2",
+      slug: "name-3",
+      name: "name3",
+      list: [
+        {id: "0", value: "value3"},
+        {id: "1", value: "value4"},
+      ]
+    },
+    {
+      id: "3",
+      slug: "name-4",
+      name: "name4",
+      list: [
+        {id: "0", value: "value3"},
+        {id: "1", value: "value4"},
+      ]
+    },
+    {
+      id: "4",
+      slug: "name-5",
+      name: "name5",
+      list: [
+        {id: "0", value: "value3"},
+        {id: "2", value: "asdas"},
+        {id: "3", value: "sss"},
+        {id: "4", value: "dgsgsd"},
+        {id: "5", value: "sdvsd"},
+        {id: "6", value: "xxxv"},
+        {id: "7", value: "dxx"},
+      ]
     }
   ],
 };

@@ -19,7 +19,7 @@ const ChoiceTheme: FC<IChoiceThemeProps> = ({ className, choiceThemeData, limite
       <Link className="choice-theme__name" to={`theme/${choiceThemeData.slug}`}>
         {choiceThemeData.name}
       </Link>
-      <ChoiceList limiter={limiter} list={choiceThemeData.list} />
+      <ChoiceList limiter={limiter} list={choiceThemeData.list} className="choice-theme__list" />
     </div>
   );
 };

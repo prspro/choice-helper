@@ -1,0 +1,15 @@
+$gap: 7.5px
+
+.grid-list
+    display: flex
+    list-style: none
+    padding: 0
+    margin: -$gap
+    flex-wrap: wrap
+    &__item
+        margin: $gap
+        min-width: calc( (100% / 3) - (2 * $gap) )
+        flex: 1
+        & > *
+            height: 100%
+            box-sizing: border-box

@@ -13,7 +13,7 @@ function App() {
       <main>
         <Container>
           <Routes>
-            <Route path="/" element={<MainPage />} errorElement />
+            <Route path="/" element={<MainPage />}/>
             <Route path="/theme/:slug" element={<ChoicePage />} />
             <Route path="*" element={<ErrorPage />} />
           </Routes>
