@@ -3,6 +3,7 @@ import ChoiceTheme from "../../components/ChoiceTheme";
 import classNames from "classnames";
 import useMainPage from "./useMainPage";
 import { GridItem, GridList } from "../../components/GridList";
+import ChoiceThemeForm from "../../components/ChoiceThemeForm";
 
 interface IMainPageProps {
   className?: string;
@@ -20,6 +21,7 @@ const MainPage: FC<IMainPageProps> = ({ className }) => {
           </GridItem>
         ))}
       </GridList>
+      <ChoiceThemeForm />
     </>
   );
 };

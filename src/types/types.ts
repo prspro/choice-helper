@@ -9,3 +9,11 @@ export interface IChoice {
   id: string;
   value: string;
 }
+
+export interface IThemeFormValues {
+  name: string;
+  fieldList: {
+    id: string;
+    value: string;
+  }[];
+}

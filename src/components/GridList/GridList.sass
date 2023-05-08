@@ -6,6 +6,9 @@ $gap: 7.5px
     padding: 0
     margin: -$gap
     flex-wrap: wrap
+    margin-bottom: $gap 
+    &:last-child
+        margin-bottom: -$gap
     &__item
         margin: $gap
         min-width: calc( (100% / 3) - (2 * $gap) )
