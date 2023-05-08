@@ -21,6 +21,9 @@ const ChoiceList: FC<IChoiceListProps> = ({ list, className, limiter }) => {
             <ChoiceItem>{entry.value}</ChoiceItem>
           </li>
         ))}
+      {limiter && limiter < list.length && (
+        <li className="choice-list__item">...</li>
+      )}
     </ul>
   );
 };
