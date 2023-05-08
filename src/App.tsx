@@ -1,6 +1,6 @@
 import Container from "./components/Container";
 import { Routes, Route } from "react-router-dom";
-import Main from "./routes/Main";
+import MainPage from "./routes/MainPage";
 import ErrorPage from "./routes/ErrorPage";
 import ChoicePage from "./routes/ChoicePage";
 
@@ -11,11 +11,13 @@ function App() {
         <Container>Header</Container>
       </header>
       <main>
-        <Routes>
-          <Route path="/" element={<Main />} errorElement />
-          <Route path="123" element={<ChoicePage />} />
-          <Route path="*" element={<ErrorPage />} />
-        </Routes>
+        <Container>
+          <Routes>
+            <Route path="/" element={<MainPage />} errorElement />
+            <Route path="/theme/:slug" element={<ChoicePage />} />
+            <Route path="*" element={<ErrorPage />} />
+          </Routes>
+        </Container>
       </main>
       <footer>
         <Container>footer</Container>

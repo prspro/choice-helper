@@ -1,11 +1,15 @@
-import React from 'react'
+import useChoicePage from "./useChoicePage";
+import ChoiceList from "../../components/ChoiceList";
 
-type Props = {}
+type Props = {};
 
 const ChoicePage = (props: Props) => {
-  return (
-    <div>ChoicePage</div>
-  )
-}
+  const { choiceThemeData } = useChoicePage();
 
-export default ChoicePage
+  return <>
+    <h2>{choiceThemeData.name}</h2>
+    <ChoiceList list={choiceThemeData.list}/>
+  </>;
+};
+
+export default ChoicePage;

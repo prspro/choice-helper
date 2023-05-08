@@ -1,26 +1,35 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IChoiceThemeData, IChoice } from "../../types/types";
 
-interface IChoiceTheme {
-  id: string;
-  slug: string;
-  name: string;
-  list: IChoice[];
-}
 
-interface IChoice {
-  id: string;
-  value: string;
-}
-
-const initialState: { list: IChoiceTheme[] } = {
-  list: [],
+const initialState: { list: IChoiceThemeData[] } = {
+  list: [
+    {
+      id: "0",
+      slug: "name-one",
+      name: "name1",
+      list: [
+        {id: "0", value: "valu1"},
+        {id: "1", value: "value2"},
+      ]
+    },
+    {
+      id: "1",
+      slug: "name-two",
+      name: "name2",
+      list: [
+        {id: "0", value: "value3"},
+        {id: "1", value: "value4"},
+      ]
+    }
+  ],
 };
 
 export const appSlice = createSlice({
   name: "app",
   initialState,
   reducers: {
-    addChoiceTheme: (state, action: PayloadAction<IChoiceTheme>) => {
+    addChoiceTheme: (state, action: PayloadAction<IChoiceThemeData>) => {
       state.list.push(action.payload);
     },
     removeChoiceTheme: (state, action: PayloadAction<string>) => {

@@ -1,9 +1,26 @@
-import React from 'react'
+import { useParams } from "react-router-dom";
+import { useAppSelector } from "../../store/hooks";
+import { IChoiceThemeData } from "../../types/types";
 
-type Props = {}
-
-const useChoicePage = (props: Props) => {
-  return {}
+// interface IUseChoicePageProps {}
+interface IUseChoicePage {
+  choiceThemeData: IChoiceThemeData;
 }
 
-export default useChoicePage
+const useChoicePage = (): IUseChoicePage => {
+  const { slug } = useParams();
+  const choiceThemeData = useAppSelector((state) => state.list)?.find(
+    (entry) => entry.slug === slug
+  ) || {
+    id: "",
+    slug: "",
+    name: "",
+    list: [],
+  };
+
+  return {
+    choiceThemeData,
+  };
+};
+
+export default useChoicePage;
