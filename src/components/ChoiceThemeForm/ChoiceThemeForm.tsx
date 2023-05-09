@@ -3,7 +3,7 @@ import "./ChoiceThemeForm.sass";
 import { Formik, Field, Form, FieldArray } from "formik";
 import useChoiceThemeForm from "./useChoiceThemeForm";
 import classNames from "classnames";
-import { IThemeFormValues } from "../../types/types";
+import { nanoid } from "nanoid";
 
 interface IChoiceThemeFormProps {
   className?: string;
@@ -28,23 +28,34 @@ const ChoiceThemeForm: FC<IChoiceThemeFormProps> = ({ className }) => {
               {({ push, remove }) => (
                 <>
                   <ul>
-                    {values.fieldList.map((entry, idx) => (
-                      //! rewrite key logic, it duplicates bsc of removing (mb nanoid()? https://www.npmjs.com/package/nanoid)
-                      <li key={idx}>
-                        <Field
-                          type="text"
-                          name={`fieldList[${idx}].value`}
-                          placeholder={`test ${idx}`}
-                        />
-                        <button type="button" onClick={() => remove(idx)}>
-                          Remove
-                        </button>
-                      </li>
-                    ))}
+                    {values.fieldList.map((entry, idx) => {
+                      return (
+                        //! rewrite key logic, it duplicates bsc of removing (mb nanoid()? https://www.npmjs.com/package/nanoid)
+                        <li key={entry.id}>
+                          <Field
+                            type="text"
+                            name={`fieldList[${idx}].value`}
+                            placeholder={`test ${idx}`}
+                          />
+                          <button
+                            type="button"
+                            onClick={() => {
+                              remove(
+                                values.fieldList.findIndex(
+                                  (val) => val.id === entry.id
+                                )
+                              );
+                            }}
+                          >
+                            Remove
+                          </button>
+                        </li>
+                      );
+                    })}
                   </ul>
                   <button
                     type="button"
-                    onClick={() => push({ id: "0", value: "" })}
+                    onClick={() => push({ id: nanoid(), value: "" })}
                   >
                     Add Item
                   </button>

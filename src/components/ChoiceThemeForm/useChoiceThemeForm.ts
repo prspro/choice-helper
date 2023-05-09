@@ -2,6 +2,7 @@ import { IThemeFormValues } from "../../types/types";
 import { useAppDispatch } from "../../store/hooks";
 import {addChoiceTheme} from "./../../store/slice/appSlice";
 import slugify from "slugify";
+import { nanoid } from "nanoid";
 
 interface IUseChoiceThemeForm {
   submitHandler: (arg: IThemeFormValues) => void;
@@ -13,8 +14,8 @@ const useChoiceThemeForm = (): IUseChoiceThemeForm => {
 
   const submitHandler = (value: IThemeFormValues) => {
     dispatch(addChoiceTheme({
-      id: "",
-      slug: slugify(value.name),
+      id: nanoid(),
+      slug: slugify(value.name.toLowerCase()),
       name: value.name,
       list: value.fieldList.map((entry, idx) => {
         return {
