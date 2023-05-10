@@ -1,31 +1,35 @@
-import { useAppSelector } from "../../store/hooks";
+import { useAppSelector, useAppDispatch } from "../../store/hooks";
 import { IChoice } from "../../types/types";
 import { IChoiceThemeData } from "../../types/types";
+import { removeChoiceTheme } from "../../store/slice/appSlice";
 
-interface IUseChoiceThemeProps {
-  choiceThemeData: IChoiceThemeData;
-  limiter?: number;
-}
+// interface IUseChoiceThemeProps {
+//   choiceThemeId: string;
+//   limiter?: number;
+// }
+
 interface IUseChoiceTheme {
-  themeName: string;
-  link: string;
-  choiceList: IChoice[];
+  name: string;
+  slug: string;
+  list: IChoice[];
+  handleRemove: () => void;
 }
 
-const useChoiceTheme = ({ choiceThemeData, limiter }: IUseChoiceThemeProps): IUseChoiceTheme => {
-  
-  // const choiceThemeData = useAppSelector((state) => state.list).find(
-  //   (entry) => entry.id === id
-  // );
+const useChoiceTheme = ({ id, slug, name, list }: IChoiceThemeData): IUseChoiceTheme => {
 
-  const themeName = choiceThemeData?.name || "";
-  const choiceList = choiceThemeData?.list || [];
-  const link = choiceThemeData?.slug || "/";
+  const dispatch = useAppDispatch()
+  
+  const handleRemove = () => {
+    dispatch(
+      removeChoiceTheme(id)
+    )
+  };
 
   return {
-    themeName,
-    choiceList,
-    link,
+    handleRemove,
+    slug,
+    name,
+    list,
   };
 };
 

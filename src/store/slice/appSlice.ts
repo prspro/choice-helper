@@ -1,9 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IChoiceThemeData, IChoice } from "../../types/types";
 
-
 const initialState: { list: IChoiceThemeData[] } = {
-  list: []
+  list: [],
 };
 
 export const appSlice = createSlice({
@@ -51,5 +50,10 @@ export const appSlice = createSlice({
   },
 });
 
-export const { addChoiceTheme } = appSlice.actions;
+export const {
+  addChoiceTheme,
+  removeChoiceTheme,
+  addChoiceToTheme,
+  removeChoiceFromTheme,
+} = appSlice.actions;
 export default appSlice.reducer;
