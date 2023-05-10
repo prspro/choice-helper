@@ -8,7 +8,7 @@ const ChoicePage = (props: Props) => {
 
   return <>
     <h2>{choiceThemeData.name}</h2>
-    <ChoiceList list={choiceThemeData.list}/>
+    <ChoiceList isEditable={true} themeData={choiceThemeData}/>
   </>;
 };
 

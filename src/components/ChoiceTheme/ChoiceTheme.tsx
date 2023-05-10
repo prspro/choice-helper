@@ -21,7 +21,7 @@ const ChoiceTheme: FC<IChoiceThemeProps> = ({className, choiceThemeData, limiter
       <Link className="choice-theme__name" to={`theme/${slug}`}>
         {name}
       </Link>
-      <ChoiceList limiter={limiter} list={list} className="choice-theme__list" />
+      <ChoiceList isEditable={false} limiter={limiter} themeData={choiceThemeData} className="choice-theme__list" />
       <button className="choice-theme__btn" onClick={handleRemove}>Remove</button>
     </div>
   );

@@ -8,6 +8,7 @@ export interface IChoiceThemeData {
 export interface IChoice {
   id: string;
   value: string;
+  isEditing: boolean;
 }
 
 export interface IThemeFormValues {

@@ -32,7 +32,7 @@ export const appSlice = createSlice({
     },
     removeChoiceFromTheme: (
       state,
-      action: PayloadAction<{ themeId: string; choiceId: string }>
+      action: PayloadAction<{ themeId: string, choiceId: string }>
     ) => {
       state.list = state.list.map((choiceTheme) => {
         if (choiceTheme.id === action.payload.themeId) {
@@ -47,6 +47,49 @@ export const appSlice = createSlice({
         }
       });
     },
+    editChoiceInTheme: (state, action: PayloadAction<{themeId: string, choiceData: {id: string, value: string}}>) => {
+      state.list = state.list.map(choiceTheme => {
+        if (choiceTheme.id === action.payload.themeId) {
+          return {
+            ...choiceTheme,
+            list: choiceTheme.list.map(choice => {
+              if (choice.id === action.payload.choiceData.id) {
+                return {
+                  ...choice,
+                  isEditing: !choice.isEditing,
+                  value: action.payload.choiceData.value,
+                }
+              } else {
+                return choice
+              }
+            }),
+          };
+        } else {
+          return choiceTheme;
+        }
+      })
+    },
+    toggleEditHandler: (state, action: PayloadAction<{ themeId: string, choiceId: string }>) => {
+      state.list = state.list.map(choiceTheme => {
+        if (choiceTheme.id === action.payload.themeId) {
+          return {
+            ...choiceTheme,
+            list: choiceTheme.list.map(choice => {
+              if (choice.id === action.payload.choiceId) {
+                return {
+                  ...choice,
+                  isEditing: !choice.isEditing,
+                }
+              } else {
+                return choice
+              }
+            }),
+          };
+        } else {
+          return choiceTheme;
+        }
+      })
+    }
   },
 });
 
@@ -55,5 +98,7 @@ export const {
   removeChoiceTheme,
   addChoiceToTheme,
   removeChoiceFromTheme,
+  editChoiceInTheme,
+  toggleEditHandler,
 } = appSlice.actions;
 export default appSlice.reducer;
