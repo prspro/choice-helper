@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, ChangeEvent } from "react";
-import { useAppSelector, useAppDispatch } from "../../store/hooks";
+import { useAppDispatch } from "../../store/hooks";
 import { IChoice, IChoiceThemeData } from "../../types/types";
 import {
   removeChoiceFromTheme,
@@ -9,9 +9,6 @@ import {
 import { nanoid } from "nanoid";
 import { editChoiceInTheme } from "../../store/slice/appSlice";
 
-// interface IUseChoiceListProps {
-//   choiceData: IChoiceThemeData
-// };
 interface IUseChoiceList {
   list: IChoice[];
   removeHandler: (arg: string) => void;
@@ -20,10 +17,13 @@ interface IUseChoiceList {
   editHandler: (arg: string) => void;
   togleEditHandler: (arg: string) => void;
   ref: React.RefObject<HTMLInputElement>;
+  randomChoicePicker: (arg: number) => void;
+  randomChiceList: IChoice[]
 }
 
 const useChoiceList = (themeData: IChoiceThemeData): IUseChoiceList => {
   const [inputValue, setInputValue] = useState<string>("");
+  const [randomChiceList, setRandomChiceList] = useState<IChoice[]>([]);
   const ref = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
   const list = themeData.list;
@@ -34,7 +34,7 @@ const useChoiceList = (themeData: IChoiceThemeData): IUseChoiceList => {
     setInputValue(e.target.value);
   };
   const editHandler = (id: string) => {
-    setInputValue(list.find(entry => entry.id === id)?.value || "");
+    setInputValue(list.find((entry) => entry.id === id)?.value || "");
     dispatch(
       editChoiceInTheme({
         themeId: themeData.id,
@@ -44,18 +44,18 @@ const useChoiceList = (themeData: IChoiceThemeData): IUseChoiceList => {
         },
       })
     );
-    
   };
   const togleEditHandler = (id: string) => {
-    setInputValue(list.find(entry => entry.id === id)?.value || "");
+    setInputValue(list.find((entry) => entry.id === id)?.value || "");
     dispatch(
       toggleEditHandler({
         themeId: themeData.id,
-        choiceId: id
+        choiceId: id,
       })
     );
   };
   const addItemHandler = () => {
+    setInputValue("");
     dispatch(
       addChoiceToTheme({
         id: themeData.id,
@@ -67,7 +67,23 @@ const useChoiceList = (themeData: IChoiceThemeData): IUseChoiceList => {
   useEffect(() => {
     ref.current && (ref.current.value = inputValue);
     ref.current?.focus();
-  }, [list]);
+  });
+
+  const getRandomChoices = (n: number) => {
+    const listCopy = list.map((entry) => {
+      return { ...entry };
+    });
+
+    for (let i = listCopy.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [listCopy[i], listCopy[j]] = [listCopy[j], listCopy[i]];
+    }
+    return listCopy.slice(0, n);
+  };
+
+  const randomChoicePicker = (n: number) => {
+    setRandomChiceList(getRandomChoices(n))
+  }
 
   return {
     list,
@@ -77,6 +93,8 @@ const useChoiceList = (themeData: IChoiceThemeData): IUseChoiceList => {
     editHandler,
     togleEditHandler,
     ref,
+    randomChoicePicker,
+    randomChiceList
   };
 };
 

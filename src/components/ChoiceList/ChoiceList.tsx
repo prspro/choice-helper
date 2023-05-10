@@ -26,68 +26,83 @@ const ChoiceList: FC<IChoiceListProps> = ({
     changeHandler,
     ref,
     togleEditHandler,
+    randomChiceList,
+    randomChoicePicker,
   } = useChoiceList(themeData);
 
   return (
-    <ul className={classNames("choice-list", className)}>
-      {list
-        .filter((entry, idx) => (limiter ? idx < limiter : true))
-        .map((entry) => (
-          <li key={entry.id} className="choice-list__item">
-            {entry.isEditing ? (
-              <>
-                <input
-                  ref={ref}
-                  onChange={changeHandler}
-                  onBlur={() => editHandler(entry.id)}
-                />
-                <button onClick={() => editHandler(entry.id)}>submit</button>
-              </>
-            ) : (
-              <>
-                <p
-                  onDoubleClick={() => {
-                    togleEditHandler(entry.id);
-                  }}
-                  className="choice-list__text"
-                >
-                  {entry.value}
-                </p>
-                {isEditable && (
-                  <>
-                    <button
-                      className="choice-list__btn"
-                      onClick={() => {
-                        editHandler(entry.id);
-                      }}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      className="choice-list__btn"
-                      onClick={() => {
-                        removeHandler(entry.id);
-                      }}
-                    >
-                      Remove
-                    </button>
-                  </>
-                )}
-              </>
-            )}
+    <>
+      <ul className={classNames("choice-list", className)}>
+        {list
+          .filter((entry, idx) => (limiter ? idx < limiter : true))
+          .map((entry) => (
+            <li key={entry.id} className="choice-list__item">
+              {entry.isEditing ? (
+                <>
+                  <input
+                    ref={ref}
+                    onChange={changeHandler}
+                    onBlur={() => editHandler(entry.id)}
+                  />
+                  <button onClick={() => editHandler(entry.id)}>submit</button>
+                </>
+              ) : (
+                <>
+                  <p
+                    onDoubleClick={() => {
+                      isEditable && togleEditHandler(entry.id);
+                    }}
+                    className="choice-list__text"
+                  >
+                    {entry.value}
+                  </p>
+                  {isEditable && (
+                    <>
+                      <button
+                        className="choice-list__btn"
+                        onClick={() => {
+                          editHandler(entry.id);
+                        }}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="choice-list__btn"
+                        onClick={() => {
+                          removeHandler(entry.id);
+                        }}
+                      >
+                        Remove
+                      </button>
+                    </>
+                  )}
+                </>
+              )}
+            </li>
+          ))}
+        {isEditable && (
+          <li>
+            <button className="choice-list__btn" onClick={addItemHandler}>
+              Add
+            </button>
           </li>
-        ))}
+        )}
+        {limiter && limiter < list.length && (
+          <li className="choice-list__item">...</li>
+        )}
+      </ul>
+
       {isEditable && (
-        <li>
-          <button className="choice-list__btn" onClick={addItemHandler}>
-            Add
-          </button>
-        </li>
+        <>
+          <ul>
+            {randomChiceList.map((entry) => (
+              <li>{entry.value}</li>
+            ))}
+          </ul>
+          <button onClick={() => randomChoicePicker(1)}>Get value</button>
+        </>
       )}
-      {limiter && limiter < list.length && (
-        <li className="choice-list__item">...</li>
-      )}
-    </ul>
+    </>
   );
 };
 
