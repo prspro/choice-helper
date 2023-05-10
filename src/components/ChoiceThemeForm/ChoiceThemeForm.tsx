@@ -9,21 +9,22 @@ interface IChoiceThemeFormProps {
   className?: string;
 }
 const ChoiceThemeForm: FC<IChoiceThemeFormProps> = ({ className }) => {
-  const { submitHandler } = useChoiceThemeForm();
+  const { submitHandler, signupSchema } = useChoiceThemeForm();
 
   return (
     <>
       <Formik
         initialValues={{ name: "", fieldList: [{ id: "0", value: "" }] }}
-        // validationSchema={}
+        validationSchema={signupSchema}
         onSubmit={(values, helpers) => {
           submitHandler(values);
           helpers.resetForm();
         }}
       >
-        {({ values }) => (
+        {({ values, errors, touched }) => (
           <Form className={classNames("choice-theme-form", className)}>
             <Field type="text" name="name" placeholder="name" />
+            {errors.name && touched.name ? <div>{errors.name}</div> : null}
             <FieldArray name="fieldList">
               {({ push, remove }) => (
                 <>
