@@ -1,4 +1,14 @@
+@import "../../styles/breakpoints"
+
 .container
+    max-width: 100%
+    width: 100%
     margin: 0 auto
-    max-width: 1200px
-    
+    @media screen and (min-width: $breakpoint-sm)
+        max-width: 720px // for small tablets and larger screens
+    @media screen and (min-width: $breakpoint-md)
+        max-width: 960px // for medium tablets and larger screens
+    @media screen and (min-width: $breakpoint-lg)
+        max-width: 1140px // for laptops and larger screens
+    @media screen and (min-width: $breakpoint-xl)
+        max-width: 1320px // for large desktop screens

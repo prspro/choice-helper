@@ -1,17 +1,21 @@
+@import "../../styles/breakpoints"
 $gap: 7.5px
-
 .grid-list
     display: flex
     list-style: none
     padding: 0
     margin: -$gap
     flex-wrap: wrap
-    margin-bottom: $gap 
+    margin-bottom: $gap
     &:last-child
         margin-bottom: -$gap
     &__item
+        min-width: 100%
+        @media (min-width: $breakpoint-md)
+            min-width: calc( (100% / 2) - (2 * $gap) )
+        @media (min-width: $breakpoint-lg)
+            min-width: calc( (100% / 3) - (2 * $gap) )
         margin: $gap
-        min-width: calc( (100% / 3) - (2 * $gap) )
         flex: 1
         & > *
             height: 100%
