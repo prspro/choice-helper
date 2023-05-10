@@ -30,7 +30,6 @@ const ChoiceThemeForm: FC<IChoiceThemeFormProps> = ({ className }) => {
                   <ul>
                     {values.fieldList.map((entry, idx) => {
                       return (
-                        //! rewrite key logic, it duplicates bsc of removing (mb nanoid()? https://www.npmjs.com/package/nanoid)
                         <li key={entry.id}>
                           <Field
                             type="text"

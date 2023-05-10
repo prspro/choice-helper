@@ -96,7 +96,7 @@ const ChoiceList: FC<IChoiceListProps> = ({
         <>
           <ul>
             {randomChiceList.map((entry) => (
-              <li>{entry.value}</li>
+              <li key={entry.id}>{entry.value}</li>
             ))}
           </ul>
           <button onClick={() => randomChoicePicker(1)}>Get value</button>
