@@ -47,6 +47,7 @@ const useChoiceList = (themeData: IChoiceThemeData): IUseChoiceList => {
     
   };
   const togleEditHandler = (id: string) => {
+    setInputValue(list.find(entry => entry.id === id)?.value || "");
     dispatch(
       toggleEditHandler({
         themeId: themeData.id,
@@ -58,14 +59,14 @@ const useChoiceList = (themeData: IChoiceThemeData): IUseChoiceList => {
     dispatch(
       addChoiceToTheme({
         id: themeData.id,
-        choiceItem: { id: nanoid(), value: inputValue, isEditing: true },
+        choiceItem: { id: nanoid(), value: "", isEditing: true },
       })
     );
   };
 
   useEffect(() => {
-    ref.current?.focus();
     ref.current && (ref.current.value = inputValue);
+    ref.current?.focus();
   }, [list]);
 
   return {
