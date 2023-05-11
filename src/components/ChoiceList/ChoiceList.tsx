@@ -91,7 +91,6 @@ const ChoiceList: FC<IChoiceListProps> = ({
           <li className="choice-list__item">...</li>
         )}
       </ul>
-
       {isEditable && (
         <>
           <ul>
