@@ -19,7 +19,7 @@ const useChoicePage = (): IUseChoicePage => {
 
   useEffect(() => {
     if (!themeData) {
-      navigate("/404");
+      navigate("/");
     }
   }, []);
 

@@ -15,7 +15,6 @@ function App() {
           <Routes>
             <Route path="/" element={<MainPage />}/>
             <Route path="/theme/:slug" element={<ChoicePage />} />
-            <Route path="/404" element={<ErrorPage />} />
             <Route path="*" element={<ErrorPage />} />
           </Routes>
         </Container>
