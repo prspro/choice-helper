@@ -1,5 +1,5 @@
 import Container from "./components/Container";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import MainPage from "./routes/MainPage";
 import ErrorPage from "./routes/ErrorPage";
 import ChoicePage from "./routes/ChoicePage";
@@ -13,7 +13,7 @@ function App() {
       <main>
         <Container>
           <Routes>
-            <Route path="/" element={<MainPage />}/>
+            <Route path="/" element={<MainPage />} />
             <Route path="/theme/:slug" element={<ChoicePage />} />
             <Route path="*" element={<ErrorPage />} />
           </Routes>

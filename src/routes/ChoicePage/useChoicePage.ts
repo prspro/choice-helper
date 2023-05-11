@@ -16,12 +16,13 @@ const useChoicePage = (): IUseChoicePage => {
   const themeData = useAppSelector((state) => state.list)?.find(
     (entry) => entry.slug === slug
   );
+  console.log(themeData === undefined);
 
   useEffect(() => {
-    if (!themeData) {
+    if (themeData === undefined) {
       navigate("/");
     }
-  }, []);
+  }, [themeData, navigate]);
 
   const choiceThemeData = themeData || {
     id: "",

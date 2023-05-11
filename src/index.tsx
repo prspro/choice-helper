@@ -17,7 +17,8 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-        <Router basename={process.env.PUBLIC_URL}>
+        {/* <Router basename={process.env.PUBLIC_URL}> */}
+        <Router basename={"/"}>
           <App />
         </Router>
       </PersistGate>
