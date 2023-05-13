@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { IThemeFormValues } from "../../types/types";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { addChoiceTheme } from "./../../store/slice/appSlice";
@@ -17,9 +18,17 @@ interface IUseChoiceThemeForm {
     },
     ""
   >;
+  isFormShown: boolean;
+  toggleIsFormShown: () => void;
 }
 
 const useChoiceThemeForm = (): IUseChoiceThemeForm => {
+  const [isFormShown, setIsFormShown] = useState<boolean>(false);
+
+  const toggleIsFormShown = () => {
+    setIsFormShown((value) => !value);
+  };
+
   const dispatch = useAppDispatch();
   const nameList = useAppSelector((state) => state.list).map(
     (entry) => entry.name
@@ -32,12 +41,11 @@ const useChoiceThemeForm = (): IUseChoiceThemeForm => {
       // .min(2, 'Too Short!')
       .max(50, "Too Long!")
       .required("Required")
-      .notOneOf(nameList, "name is already used")
+      .notOneOf(nameList, "name is already used"),
   });
 
   const submitHandler = (value: IThemeFormValues) => {
     const newSlug = slugify(value.name.toLowerCase());
-
     dispatch(
       addChoiceTheme({
         id: nanoid(),
@@ -52,11 +60,14 @@ const useChoiceThemeForm = (): IUseChoiceThemeForm => {
         }),
       })
     );
+    toggleIsFormShown();
   };
 
   return {
     submitHandler,
     signupSchema,
+    isFormShown,
+    toggleIsFormShown,
   };
 };
 

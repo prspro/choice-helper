@@ -1,5 +1,5 @@
 import Container from "./components/Container";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 import MainPage from "./routes/MainPage";
 import ErrorPage from "./routes/ErrorPage";
 import ChoicePage from "./routes/ChoicePage";
@@ -8,7 +8,7 @@ function App() {
   return (
     <>
       <header>
-        <Container>Header</Container>
+        <Container><Link to="/">Main</Link></Container>
       </header>
       <main>
         <Container>

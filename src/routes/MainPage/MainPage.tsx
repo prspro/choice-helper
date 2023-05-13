@@ -15,13 +15,17 @@ const MainPage: FC<IMainPageProps> = ({ className }) => {
   return (
     <>
       <GridList className={classNames(className)}>
-        {choiceThemeList.map((entry) => (
-          <GridItem key={entry.id}>
-            <ChoiceTheme choiceThemeData={entry} limiter={3} />
+        <>
+          <GridItem>
+            <ChoiceThemeForm />
           </GridItem>
-        ))}
+          {choiceThemeList.map((entry) => (
+            <GridItem key={entry.id}>
+              <ChoiceTheme choiceThemeData={entry} limiter={3} />
+            </GridItem>
+          ))}
+        </>
       </GridList>
-      <ChoiceThemeForm />
     </>
   );
 };
