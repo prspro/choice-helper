@@ -56,7 +56,7 @@ export const appSlice = createSlice({
               if (choice.id === action.payload.choiceData.id) {
                 return {
                   ...choice,
-                  isEditing: !choice.isEditing,
+                  isEditing: false,
                   value: action.payload.choiceData.value,
                 }
               } else {

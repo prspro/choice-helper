@@ -1,7 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { useAppSelector } from "../../store/hooks";
+import { useAppSelector, useAppDispatch } from "../../store/hooks";
 import { IChoiceThemeData } from "../../types/types";
 
 // interface IUseChoicePageProps {}
@@ -12,11 +12,18 @@ interface IUseChoicePage {
 const useChoicePage = (): IUseChoicePage => {
   const { slug } = useParams();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  const [isNameEditing, setIsNameEditing] = useState<boolean>(false);
+  const ref = useRef<HTMLInputElement>(null)
+
+  const handleRenameTheme = () => {
+
+  } 
 
   const themeData = useAppSelector((state) => state.list)?.find(
     (entry) => entry.slug === slug
   );
-  console.log(themeData === undefined);
 
   useEffect(() => {
     if (themeData === undefined) {

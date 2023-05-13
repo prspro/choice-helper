@@ -14,7 +14,7 @@ interface IUseChoiceList {
   removeHandler: (arg: string) => void;
   addItemHandler: () => void;
   changeHandler: (arg: ChangeEvent<HTMLInputElement>) => void;
-  editHandler: (arg: string) => void;
+  editHandler: (arg1: string) => (arg2: string) => void;
   togleEditHandler: (arg: string) => void;
   ref: React.RefObject<HTMLInputElement>;
   randomChoicePicker: (arg: number) => void;
@@ -33,14 +33,14 @@ const useChoiceList = (themeData: IChoiceThemeData): IUseChoiceList => {
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
-  const editHandler = (id: string) => {
+  const editHandler = (id: string) => (value: string) => {  
     setInputValue(list.find((entry) => entry.id === id)?.value || "");
     dispatch(
       editChoiceInTheme({
         themeId: themeData.id,
         choiceData: {
           id: id,
-          value: inputValue,
+          value: value,
         },
       })
     );
@@ -84,6 +84,12 @@ const useChoiceList = (themeData: IChoiceThemeData): IUseChoiceList => {
   const randomChoicePicker = (n: number) => {
     setRandomChiceList(getRandomChoices(n))
   }
+
+  const clsr = (arg?:any) => () => {
+    console.log(arg);
+  };
+
+  clsr("foo");
 
   return {
     list,

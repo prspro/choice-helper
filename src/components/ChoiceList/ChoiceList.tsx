@@ -4,6 +4,7 @@ import useChoiceList from "./useChoiceList";
 import classNames from "classnames";
 // import ChoiceItem from "../ChoiceItem/ChoiceItem";
 import { IChoiceThemeData } from "../../types/types";
+import EditableField from "../EditableField";
 
 type IChoiceListProps = {
   themeData: IChoiceThemeData;
@@ -37,7 +38,25 @@ const ChoiceList: FC<IChoiceListProps> = ({
           .filter((entry, idx) => (limiter ? idx < limiter : true))
           .map((entry) => (
             <li key={entry.id} className="choice-list__item">
-              {entry.isEditing ? (
+              <EditableField
+                isEditable={isEditable}
+                isEditing={entry.isEditing}
+                handleEdit={editHandler(entry.id)}
+              >
+                {entry.value}
+              </EditableField>
+              {isEditable && (
+                <button
+                  className="choice-list__btn"
+                  onClick={() => {
+                    removeHandler(entry.id);
+                  }}
+                >
+                  Remove
+                </button>
+              )}
+
+              {/* {entry.isEditing ? (
                 <>
                   <input
                     ref={ref}
@@ -77,7 +96,7 @@ const ChoiceList: FC<IChoiceListProps> = ({
                     </>
                   )}
                 </>
-              )}
+              )} */}
             </li>
           ))}
         {isEditable && (

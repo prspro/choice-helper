@@ -1,5 +1,6 @@
 import useChoicePage from "./useChoicePage";
 import ChoiceList from "../../components/ChoiceList";
+import EditableField from "../../components/EditableField";
 
 type Props = {};
 
@@ -7,6 +8,7 @@ const ChoicePage = (props: Props) => {
   const { choiceThemeData } = useChoicePage();
 
   return <>
+    <EditableField>foobar</EditableField>
     <h2>{choiceThemeData.name}</h2>
     <ChoiceList isEditable={true} themeData={choiceThemeData}/>
   </>;
