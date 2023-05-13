@@ -24,9 +24,6 @@ const ChoiceList: FC<IChoiceListProps> = ({
     removeHandler,
     editHandler,
     addItemHandler,
-    changeHandler,
-    ref,
-    togleEditHandler,
     randomChiceList,
     randomChoicePicker,
   } = useChoiceList(themeData);
@@ -55,48 +52,6 @@ const ChoiceList: FC<IChoiceListProps> = ({
                   Remove
                 </button>
               )}
-
-              {/* {entry.isEditing ? (
-                <>
-                  <input
-                    ref={ref}
-                    onChange={changeHandler}
-                    onBlur={() => editHandler(entry.id)}
-                  />
-                  <button onClick={() => editHandler(entry.id)}>submit</button>
-                </>
-              ) : (
-                <>
-                  <p
-                    onDoubleClick={() => {
-                      isEditable && togleEditHandler(entry.id);
-                    }}
-                    className="choice-list__text"
-                  >
-                    {entry.value}
-                  </p>
-                  {isEditable && (
-                    <>
-                      <button
-                        className="choice-list__btn"
-                        onClick={() => {
-                          editHandler(entry.id);
-                        }}
-                      >
-                        Edit
-                      </button>
-                      <button
-                        className="choice-list__btn"
-                        onClick={() => {
-                          removeHandler(entry.id);
-                        }}
-                      >
-                        Remove
-                      </button>
-                    </>
-                  )}
-                </>
-              )} */}
             </li>
           ))}
         {isEditable && (

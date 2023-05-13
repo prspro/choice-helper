@@ -13,12 +13,9 @@ interface IUseChoiceList {
   list: IChoice[];
   removeHandler: (arg: string) => void;
   addItemHandler: () => void;
-  changeHandler: (arg: ChangeEvent<HTMLInputElement>) => void;
   editHandler: (arg1: string) => (arg2: string) => void;
-  togleEditHandler: (arg: string) => void;
-  ref: React.RefObject<HTMLInputElement>;
   randomChoicePicker: (arg: number) => void;
-  randomChiceList: IChoice[]
+  randomChiceList: IChoice[];
 }
 
 const useChoiceList = (themeData: IChoiceThemeData): IUseChoiceList => {
@@ -27,13 +24,12 @@ const useChoiceList = (themeData: IChoiceThemeData): IUseChoiceList => {
   const ref = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
   const list = themeData.list;
+
   const removeHandler = (id: string) => {
     dispatch(removeChoiceFromTheme({ themeId: themeData.id, choiceId: id }));
   };
-  const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-  };
-  const editHandler = (id: string) => (value: string) => {  
+
+  const editHandler = (id: string) => (value: string) => {
     setInputValue(list.find((entry) => entry.id === id)?.value || "");
     dispatch(
       editChoiceInTheme({
@@ -45,15 +41,7 @@ const useChoiceList = (themeData: IChoiceThemeData): IUseChoiceList => {
       })
     );
   };
-  const togleEditHandler = (id: string) => {
-    setInputValue(list.find((entry) => entry.id === id)?.value || "");
-    dispatch(
-      toggleEditHandler({
-        themeId: themeData.id,
-        choiceId: id,
-      })
-    );
-  };
+
   const addItemHandler = () => {
     setInputValue("");
     dispatch(
@@ -73,7 +61,6 @@ const useChoiceList = (themeData: IChoiceThemeData): IUseChoiceList => {
     const listCopy = list.map((entry) => {
       return { ...entry };
     });
-
     for (let i = listCopy.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [listCopy[i], listCopy[j]] = [listCopy[j], listCopy[i]];
@@ -82,10 +69,10 @@ const useChoiceList = (themeData: IChoiceThemeData): IUseChoiceList => {
   };
 
   const randomChoicePicker = (n: number) => {
-    setRandomChiceList(getRandomChoices(n))
-  }
+    setRandomChiceList(getRandomChoices(n));
+  };
 
-  const clsr = (arg?:any) => () => {
+  const clsr = (arg?: any) => () => {
     console.log(arg);
   };
 
@@ -95,12 +82,9 @@ const useChoiceList = (themeData: IChoiceThemeData): IUseChoiceList => {
     list,
     removeHandler,
     addItemHandler,
-    changeHandler,
     editHandler,
-    togleEditHandler,
-    ref,
     randomChoicePicker,
-    randomChiceList
+    randomChiceList,
   };
 };
 
