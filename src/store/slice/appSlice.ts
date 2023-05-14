@@ -16,6 +16,19 @@ export const appSlice = createSlice({
     removeChoiceTheme: (state, action: PayloadAction<string>) => {
       state.list = state.list.filter((entry) => entry.id !== action.payload);
     },
+    editChoiceTheme: (state, action: PayloadAction<{id: string, slug: string, name: string}>) => {
+      state.list = state.list.map(theme => {
+        if (theme.id === action.payload.id) {
+          return {
+            ...theme,
+            name: action.payload.name,
+            slug: action.payload.slug,
+          }
+        } else {
+          return theme;
+        }
+      })
+    },
     addChoiceToTheme: (
       state,
       action: PayloadAction<{ id: string; choiceItem: IChoice }>
@@ -96,6 +109,7 @@ export const appSlice = createSlice({
 export const {
   addChoiceTheme,
   removeChoiceTheme,
+  editChoiceTheme,
   addChoiceToTheme,
   removeChoiceFromTheme,
   editChoiceInTheme,
