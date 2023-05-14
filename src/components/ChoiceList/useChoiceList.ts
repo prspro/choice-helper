@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, ChangeEvent } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useAppDispatch } from "../../store/hooks";
 import { IChoice, IChoiceThemeData } from "../../types/types";
 import {
@@ -30,7 +30,6 @@ const useChoiceList = (themeData: IChoiceThemeData): IUseChoiceList => {
   };
 
   const editHandler = (id: string) => (value: string) => {
-    setInputValue(list.find((entry) => entry.id === id)?.value || "");
     dispatch(
       editChoiceInTheme({
         themeId: themeData.id,
@@ -38,6 +37,12 @@ const useChoiceList = (themeData: IChoiceThemeData): IUseChoiceList => {
           id: id,
           value: value,
         },
+      })
+    );
+    dispatch(
+      toggleEditHandler({
+        themeId: themeData.id,
+        choiceId: id,
       })
     );
   };

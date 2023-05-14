@@ -33,8 +33,9 @@ const useEditableField = ({
   };
 
   const toggleEditing = () => {
+    //! fires twice - on start editing and on finish editing
     if (isEditable) {
-        if (isFieldEditable && handleEdit !== undefined) {
+        if (handleEdit !== undefined) {
           handleEdit(fieldValue);
         }
         setIsFieldEditable((value) => !value);

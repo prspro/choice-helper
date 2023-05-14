@@ -42,7 +42,7 @@ const ChoiceList: FC<IChoiceListProps> = ({
               >
                 {entry.value}
               </EditableField>
-              {isEditable && (
+              {isEditable && !entry.isEditing && (
                 <button
                   className="choice-list__btn"
                   onClick={() => {

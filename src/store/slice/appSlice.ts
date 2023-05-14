@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IChoiceThemeData, IChoice } from "../../types/types";
+import ChoiceTheme from "../../components/ChoiceTheme";
 
 const initialState: { list: IChoiceThemeData[] } = {
   list: [],
@@ -56,7 +57,6 @@ export const appSlice = createSlice({
               if (choice.id === action.payload.choiceData.id) {
                 return {
                   ...choice,
-                  isEditing: false,
                   value: action.payload.choiceData.value,
                 }
               } else {

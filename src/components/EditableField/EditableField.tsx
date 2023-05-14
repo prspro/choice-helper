@@ -43,6 +43,7 @@ const EditableField: FC<IEditableFieldProps> = ({
           onChange={handleOnChange}
         />
       )}
+      {!isFieldEditable && isEditable && <button onClick={toggleEditing}>Edit</button>}
     </>
   );
 };
