@@ -36,6 +36,23 @@ const useChoicePage = (): IUseChoicePage => {
   const [isThemeEditing, setisThemeEditing] = useState<boolean>(false);
   const [isNameEditing, setIsNameEditing] = useState<boolean>(false);
 
+  const themeData = useAppSelector((state) => state.list)?.find(
+    (entry) => entry.slug === slug
+  );
+
+  useEffect(() => {
+    if (themeData === undefined) {
+      navigate("/");
+    }
+  }, [themeData, navigate]);
+
+  const choiceThemeData = themeData || {
+    id: "",
+    slug: "",
+    name: "",
+    list: [],
+  };
+
   const toggleIsThemeEditing = () => {
     setisThemeEditing((value) => !value);
   };
@@ -44,9 +61,11 @@ const useChoicePage = (): IUseChoicePage => {
     setIsNameEditing((value) => !value);
   };
 
-  const nameList = useAppSelector((state) => state.list).map(
+  const nameList = useAppSelector((state) => state.list)
+  .map(
     (entry) => entry.name
-  );
+  )
+  .filter(entry => entry !== choiceThemeData.name);
   const slugList = useAppSelector((state) => state.list).map(
     (entry) => entry.slug
   );
@@ -75,31 +94,16 @@ const useChoicePage = (): IUseChoicePage => {
     //! need to be reworked bcs of possible name duplicating (Formik with Yup?)
     const newSlug = slugify(newName.toLowerCase());
     toggleIsNameEditing();
-    dispatch(
-      editChoiceTheme({
-        id: choiceThemeData.id,
-        slug: slugList.includes(newSlug) ? `${newSlug}-${nanoid(5)}` : newSlug,
-        name: newName,
-      })
-    );
-    navigate(`/theme/${newSlug}`);
-  };
-
-  const themeData = useAppSelector((state) => state.list)?.find(
-    (entry) => entry.slug === slug
-  );
-
-  useEffect(() => {
-    if (themeData === undefined) {
-      navigate("/");
+    if (newName !== choiceThemeData.name) {
+      dispatch(
+        editChoiceTheme({
+          id: choiceThemeData.id,
+          slug: slugList.includes(newSlug) ? `${newSlug}-${nanoid(5)}` : newSlug,
+          name: newName,
+        })
+      );
+      navigate(`/theme/${newSlug}`);
     }
-  }, [themeData, navigate]);
-
-  const choiceThemeData = themeData || {
-    id: "",
-    slug: "",
-    name: "",
-    list: [],
   };
 
   return {
