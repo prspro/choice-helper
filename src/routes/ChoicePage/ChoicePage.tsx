@@ -2,6 +2,7 @@ import useChoicePage from "./useChoicePage";
 import ChoiceList from "../../components/ChoiceList";
 // import EditableField from "../../components/EditableField";
 import { Formik, Form, Field } from "formik";
+import RandomPicker from "../../components/RandomPicker";
 
 type Props = {};
 
@@ -58,6 +59,8 @@ const ChoicePage = (props: Props) => {
       </h2> */}
       <button onClick={toggleIsThemeEditing}>Edit theme</button>
       <ChoiceList isEditable={isThemeEditing} themeData={choiceThemeData} />
+
+      <RandomPicker choiceList={choiceThemeData.list} />
     </>
   );
 };

@@ -14,8 +14,6 @@ interface IUseChoiceList {
   removeHandler: (arg: string) => void;
   addItemHandler: () => void;
   editHandler: (arg1: string) => (arg2: string) => void;
-  randomChoicePicker: (arg: number) => void;
-  randomChiceList: IChoice[];
 }
 
 const useChoiceList = (themeData: IChoiceThemeData): IUseChoiceList => {
@@ -62,21 +60,6 @@ const useChoiceList = (themeData: IChoiceThemeData): IUseChoiceList => {
     ref.current?.focus();
   });
 
-  const getRandomChoices = (n: number) => {
-    const listCopy = list.map((entry) => {
-      return { ...entry };
-    });
-    for (let i = listCopy.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [listCopy[i], listCopy[j]] = [listCopy[j], listCopy[i]];
-    }
-    return listCopy.slice(0, n);
-  };
-
-  const randomChoicePicker = (n: number) => {
-    setRandomChiceList(getRandomChoices(n));
-  };
-
   const clsr = (arg?: any) => () => {
     console.log(arg);
   };
@@ -88,8 +71,6 @@ const useChoiceList = (themeData: IChoiceThemeData): IUseChoiceList => {
     removeHandler,
     addItemHandler,
     editHandler,
-    randomChoicePicker,
-    randomChiceList,
   };
 };
 

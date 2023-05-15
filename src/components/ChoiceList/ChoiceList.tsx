@@ -24,8 +24,6 @@ const ChoiceList: FC<IChoiceListProps> = ({
     removeHandler,
     editHandler,
     addItemHandler,
-    randomChiceList,
-    randomChoicePicker,
   } = useChoiceList(themeData);
 
   return (
@@ -65,16 +63,6 @@ const ChoiceList: FC<IChoiceListProps> = ({
           <li className="choice-list__item">...</li>
         )}
       </ul>
-      {isEditable && (
-        <>
-          <ul>
-            {randomChiceList.map((entry) => (
-              <li key={entry.id}>{entry.value}</li>
-            ))}
-          </ul>
-          <button onClick={() => randomChoicePicker(1)}>Get value</button>
-        </>
-      )}
     </>
   );
 };
