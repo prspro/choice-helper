@@ -34,6 +34,7 @@ const ChoiceList: FC<IChoiceListProps> = ({
           .map((entry) => (
             <li key={entry.id} className="choice-list__item">
               <EditableField
+                className="choice-list__value"
                 isEditable={isEditable}
                 isEditing={entry.isEditing}
                 handleEdit={editHandler(entry.id)}

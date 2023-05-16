@@ -8,7 +8,9 @@ function App() {
   return (
     <>
       <header>
-        <Container><Link to="/">Main</Link></Container>
+        <Container>
+          <Link to="/">Choice helper</Link>
+        </Container>
       </header>
       <main>
         <Container>
@@ -20,7 +22,13 @@ function App() {
         </Container>
       </main>
       <footer>
-        <Container>footer</Container>
+        <Container>
+          <Link
+            to="https://github.com/prspro/choice-helper"
+            rel="noreferrer"
+            target="_blank"
+          >GitHub</Link>
+        </Container>
       </footer>
     </>
   );

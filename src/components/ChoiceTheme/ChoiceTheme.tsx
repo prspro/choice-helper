@@ -12,17 +12,29 @@ interface IChoiceThemeProps {
   limiter?: number;
 }
 
-const ChoiceTheme: FC<IChoiceThemeProps> = ({className, choiceThemeData, limiter}) => {
-
-  const {name, slug, list, handleRemove} = useChoiceTheme(choiceThemeData)
+const ChoiceTheme: FC<IChoiceThemeProps> = ({
+  className,
+  choiceThemeData,
+  limiter,
+}) => {
+  const { name, slug, list, handleRemove } = useChoiceTheme(choiceThemeData);
 
   return (
     <div className={classNames("choice-theme", className)}>
-      <Link className="choice-theme__name" to={`theme/${slug}`}>
-        {name}
-      </Link>
-      <ChoiceList isEditable={false} limiter={limiter} themeData={choiceThemeData} className="choice-theme__list" />
-      <button className="choice-theme__btn" onClick={handleRemove}>Remove</button>
+      <div className="choice-theme__upper-bar">
+        <Link className="choice-theme__name" to={`theme/${slug}`}>
+          {name}
+        </Link>
+        <button className="choice-theme__remove-btn" onClick={handleRemove}>
+          Remove
+        </button>
+      </div>
+      <ChoiceList
+        isEditable={false}
+        limiter={limiter}
+        themeData={choiceThemeData}
+        className="choice-theme__list"
+      />
     </div>
   );
 };

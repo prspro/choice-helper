@@ -6,11 +6,13 @@ $gap: 7.5px
     padding: 0
     margin: -$gap
     flex-wrap: wrap
+    flex-direction: column
     margin-bottom: $gap
     &:last-child
         margin-bottom: -$gap
     &__item
-        min-width: 100%
+        // min-width: 100%
+        // flex-direction: column
         @media (min-width: $breakpoint-md)
             min-width: calc( (100% / 2) - (2 * $gap) )
         @media (min-width: $breakpoint-lg)
@@ -20,3 +22,5 @@ $gap: 7.5px
         & > *
             height: 100%
             box-sizing: border-box
+    @media (min-width: $breakpoint-md)
+        flex-direction: row
