@@ -3,6 +3,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import MainPage from "./routes/MainPage";
 import ErrorPage from "./routes/ErrorPage";
 import ChoicePage from "./routes/ChoicePage";
+import Overlay from "./components/Overlay";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           >GitHub</Link>
         </Container>
       </footer>
+      <Overlay />
     </>
   );
 }

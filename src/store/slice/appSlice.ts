@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IChoiceThemeData, IChoice } from "../../types/types";
-import ChoiceTheme from "../../components/ChoiceTheme";
 
-const initialState: { list: IChoiceThemeData[] } = {
+const initialState: { list: IChoiceThemeData[]; isOverlayShown: boolean } = {
   list: [],
+  isOverlayShown: true,
 };
 
 export const appSlice = createSlice({
@@ -16,18 +16,21 @@ export const appSlice = createSlice({
     removeChoiceTheme: (state, action: PayloadAction<string>) => {
       state.list = state.list.filter((entry) => entry.id !== action.payload);
     },
-    editChoiceTheme: (state, action: PayloadAction<{id: string, slug: string, name: string}>) => {
-      state.list = state.list.map(theme => {
+    editChoiceTheme: (
+      state,
+      action: PayloadAction<{ id: string; slug: string; name: string }>
+    ) => {
+      state.list = state.list.map((theme) => {
         if (theme.id === action.payload.id) {
           return {
             ...theme,
             name: action.payload.name,
             slug: action.payload.slug,
-          }
+          };
         } else {
           return theme;
         }
-      })
+      });
     },
     addChoiceToTheme: (
       state,
@@ -46,7 +49,7 @@ export const appSlice = createSlice({
     },
     removeChoiceFromTheme: (
       state,
-      action: PayloadAction<{ themeId: string, choiceId: string }>
+      action: PayloadAction<{ themeId: string; choiceId: string }>
     ) => {
       state.list = state.list.map((choiceTheme) => {
         if (choiceTheme.id === action.payload.themeId) {
@@ -61,48 +64,66 @@ export const appSlice = createSlice({
         }
       });
     },
-    editChoiceInTheme: (state, action: PayloadAction<{themeId: string, choiceData: {id: string, value: string}}>) => {
-      state.list = state.list.map(choiceTheme => {
+    editChoiceInTheme: (
+      state,
+      action: PayloadAction<{
+        themeId: string;
+        choiceData: { id: string; value: string };
+      }>
+    ) => {
+      state.list = state.list.map((choiceTheme) => {
         if (choiceTheme.id === action.payload.themeId) {
           return {
             ...choiceTheme,
-            list: choiceTheme.list.map(choice => {
+            list: choiceTheme.list.map((choice) => {
               if (choice.id === action.payload.choiceData.id) {
                 return {
                   ...choice,
                   value: action.payload.choiceData.value,
-                }
+                };
               } else {
-                return choice
+                return choice;
               }
             }),
           };
         } else {
           return choiceTheme;
         }
-      })
+      });
     },
-    toggleEditHandler: (state, action: PayloadAction<{ themeId: string, choiceId: string }>) => {
-      state.list = state.list.map(choiceTheme => {
+    toggleEditHandler: (
+      state,
+      action: PayloadAction<{ themeId: string; choiceId: string }>
+    ) => {
+      state.list = state.list.map((choiceTheme) => {
         if (choiceTheme.id === action.payload.themeId) {
           return {
             ...choiceTheme,
-            list: choiceTheme.list.map(choice => {
+            list: choiceTheme.list.map((choice) => {
               if (choice.id === action.payload.choiceId) {
                 return {
                   ...choice,
                   isEditing: !choice.isEditing,
-                }
+                };
               } else {
-                return choice
+                return choice;
               }
             }),
           };
         } else {
           return choiceTheme;
         }
-      })
-    }
+      });
+    },
+    toggleOverlay: (state, action: PayloadAction) => {
+      state.isOverlayShown = !state.isOverlayShown;
+    },
+    showOverlay: (state, action: PayloadAction) => {
+      state.isOverlayShown = true;
+    },
+    hideOverlay: (state, action: PayloadAction) => {
+      state.isOverlayShown = false;
+    },
   },
 });
 
@@ -114,5 +135,8 @@ export const {
   removeChoiceFromTheme,
   editChoiceInTheme,
   toggleEditHandler,
+  toggleOverlay,
+  showOverlay,
+  hideOverlay,
 } = appSlice.actions;
 export default appSlice.reducer;
