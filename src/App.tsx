@@ -4,6 +4,8 @@ import MainPage from "./routes/MainPage";
 import ErrorPage from "./routes/ErrorPage";
 import ChoicePage from "./routes/ChoicePage";
 import Overlay from "./components/Overlay";
+import ChoiceTheme from "./components/ChoiceTheme";
+import ChoiceThemeForm from "./components/ThemeForm";
 
 function App() {
   return (
@@ -28,10 +30,14 @@ function App() {
             to="https://github.com/prspro/choice-helper"
             rel="noreferrer"
             target="_blank"
-          >GitHub</Link>
+          >
+            GitHub
+          </Link>
         </Container>
       </footer>
-      <Overlay />
+      <Overlay>
+        <ChoiceThemeForm />
+      </Overlay>
     </>
   );
 }

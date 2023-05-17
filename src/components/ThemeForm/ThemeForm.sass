@@ -1,0 +1,66 @@
+.theme-form
+    // border: 1px dashed #000
+    background-color: #fff
+    padding: 15px
+    position: relative
+    // display: flex
+    // justify-content: flex-start
+    & input
+        border: none
+        border-bottom: 1px solid #025259
+        border-left: 7px solid #025259
+        outline: none
+        background: none
+        min-width: 0px
+        padding: 3px
+        &:focus
+            background-color: #eee
+    &__name
+        margin-bottom: 25px
+        font-size: 1.5em
+    &__warn
+        font-size: 0.7em
+        color: #f00
+        padding: 3px
+    &__list
+        list-style-type: none
+        margin: 0 0 5px
+        padding: 0
+    &__list-item
+        margin-bottom: 8px
+        &:last-child
+            margin-bottom: 0
+    &__remove-btn
+        height: 20px
+        width: 20px
+        vertical-align: middle
+    & &__add-btn
+        height: 20px
+        width: 20px
+        margin-bottom: 15px
+    & &__submit-btn
+        font-size: 1.1em
+        display: block
+
+
+    // &__add-btn
+    //     display: block
+    //     margin: auto
+    //     position: relative
+    //     border-radius: 50%
+    //     height: $minHeight
+    //     width: $minHeight
+    //     cursor: pointer
+    //     &::before, &::after
+    //         content: "",
+    //         top: 50%
+    //         left: 50%
+    //         position: absolute
+    //         height: 80%
+    //         width: 10%
+    //         background-color: #000
+    //     &::after
+    //         transform: translate(-50%, -50%) rotate(90deg)
+    //     &::before
+    //         transform: translate(-50%, -50%)
+

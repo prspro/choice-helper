@@ -115,13 +115,13 @@ export const appSlice = createSlice({
         }
       });
     },
-    toggleOverlay: (state, action: PayloadAction) => {
+    toggleOverlay: (state) => {
       state.isOverlayShown = !state.isOverlayShown;
     },
-    showOverlay: (state, action: PayloadAction) => {
+    showOverlay: (state) => {
       state.isOverlayShown = true;
     },
-    hideOverlay: (state, action: PayloadAction) => {
+    hideOverlay: (state) => {
       state.isOverlayShown = false;
     },
   },

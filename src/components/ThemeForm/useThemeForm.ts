@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { IThemeFormValues } from "../../types/types";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { addChoiceTheme } from "./../../store/slice/appSlice";
+import { addChoiceTheme, hideOverlay } from "../../store/slice/appSlice";
 import slugify from "slugify";
 import { nanoid } from "nanoid";
 import * as Yup from "yup";
 
 interface IUseChoiceThemeForm {
-  submitHandler: (arg: IThemeFormValues) => void;
+  handleSubmit: (arg: IThemeFormValues) => void;
   signupSchema: Yup.ObjectSchema<
     {
       name: string;
@@ -44,7 +44,7 @@ const useChoiceThemeForm = (): IUseChoiceThemeForm => {
       .notOneOf(nameList, "name is already used"),
   });
 
-  const submitHandler = (value: IThemeFormValues) => {
+  const handleSubmit = (value: IThemeFormValues) => {
     const newSlug = slugify(value.name.toLowerCase());
     dispatch(
       addChoiceTheme({
@@ -60,11 +60,14 @@ const useChoiceThemeForm = (): IUseChoiceThemeForm => {
         }),
       })
     );
-    toggleIsFormShown();
+    dispatch(
+      hideOverlay()
+    );
+    // toggleIsFormShown();
   };
 
   return {
-    submitHandler,
+    handleSubmit,
     signupSchema,
     isFormShown,
     toggleIsFormShown,
