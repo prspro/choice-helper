@@ -18,7 +18,7 @@ const ChoiceTheme: FC<IChoiceThemeProps> = ({
   choiceThemeData,
   limiter,
 }) => {
-  const { name, slug, list, handleRemove } = useChoiceTheme(choiceThemeData);
+  const { name, slug, list, handleRemove, handleEditing } = useChoiceTheme(choiceThemeData);
 
   return (
     <div className={classNames("choice-theme", className)}>
@@ -38,7 +38,7 @@ const ChoiceTheme: FC<IChoiceThemeProps> = ({
           className="choice-theme__remove-btn btn btn--remove"
           onClick={handleRemove}
         ></button>
-        <button className="choice-theme__edit-btn btn">
+        <button onClick={handleEditing} className="choice-theme__edit-btn btn">
           <SVGicon id="edit" />
         </button>
       </div>

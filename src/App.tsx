@@ -4,8 +4,7 @@ import MainPage from "./routes/MainPage";
 import ErrorPage from "./routes/ErrorPage";
 import ChoicePage from "./routes/ChoicePage";
 import Overlay from "./components/Overlay";
-import ChoiceTheme from "./components/ChoiceTheme";
-import ChoiceThemeForm from "./components/ThemeForm";
+import ThemeForm from "./components/ThemeForm";
 
 function App() {
   return (
@@ -36,7 +35,7 @@ function App() {
         </Container>
       </footer>
       <Overlay>
-        <ChoiceThemeForm />
+        <ThemeForm />
       </Overlay>
     </>
   );

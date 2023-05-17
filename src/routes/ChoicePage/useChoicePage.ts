@@ -49,6 +49,7 @@ const useChoicePage = (): IUseChoicePage => {
   const choiceThemeData = themeData || {
     id: "",
     slug: "",
+    isEditing: false,
     name: "",
     list: [],
   };
@@ -77,33 +78,20 @@ const useChoicePage = (): IUseChoicePage => {
       .notOneOf(nameList, "name is already used"),
   });
 
-  // const handleEditThemeName = (newName: string) => {
-  //   //! need to be reworked bcs of possible name duplicating (Formik with Yup?)
-  //   const newSlug = slugify(newName)
-  //   dispatch(
-  //     editChoiceTheme({
-  //       id: choiceThemeData.id,
-  //       slug: newSlug,
-  //       name: newName,
-  //     })
-  //   );
-  //   navigate(`/theme/${newSlug}`);
-  // };
-
   const handleEditThemeName = (newName: string) => {
     //! need to be reworked bcs of possible name duplicating (Formik with Yup?)
-    const newSlug = slugify(newName.toLowerCase());
-    toggleIsNameEditing();
-    if (newName !== choiceThemeData.name) {
-      dispatch(
-        editChoiceTheme({
-          id: choiceThemeData.id,
-          slug: slugList.includes(newSlug) ? `${newSlug}-${nanoid(5)}` : newSlug,
-          name: newName,
-        })
-      );
-      navigate(`/theme/${newSlug}`);
-    }
+    // const newSlug = slugify(newName.toLowerCase());
+    // toggleIsNameEditing();
+    // if (newName !== choiceThemeData.name) {
+    //   dispatch(
+    //     editChoiceTheme({
+    //       id: choiceThemeData.id,
+    //       slug: slugList.includes(newSlug) ? `${newSlug}-${nanoid(5)}` : newSlug,
+    //       name: newName,
+    //     })
+    //   );
+    //   navigate(`/theme/${newSlug}`);
+    // }
   };
 
   return {

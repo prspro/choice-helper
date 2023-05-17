@@ -4,7 +4,7 @@ import { IChoice, IChoiceThemeData } from "../../types/types";
 import {
   removeChoiceFromTheme,
   addChoiceToTheme,
-  toggleEditHandler,
+  // toggleEditHandler,
 } from "../../store/slice/appSlice";
 import { nanoid } from "nanoid";
 import { editChoiceInTheme } from "../../store/slice/appSlice";
@@ -37,22 +37,22 @@ const useChoiceList = (themeData: IChoiceThemeData): IUseChoiceList => {
         },
       })
     );
-    dispatch(
-      toggleEditHandler({
-        themeId: themeData.id,
-        choiceId: id,
-      })
-    );
+    // dispatch(
+    //   toggleEditHandler({
+    //     themeId: themeData.id,
+    //     choiceId: id,
+    //   })
+    // );
   };
 
   const addItemHandler = () => {
-    setInputValue("");
-    dispatch(
-      addChoiceToTheme({
-        id: themeData.id,
-        choiceItem: { id: nanoid(), value: "", isEditing: true },
-      })
-    );
+    // setInputValue("");
+    // dispatch(
+    //   addChoiceToTheme({
+    //     id: themeData.id,
+    //     choiceItem: { id: nanoid(), value: "", isEditing: true },
+    //   })
+    // );
   };
 
   useEffect(() => {

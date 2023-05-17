@@ -3,7 +3,7 @@ import { IChoiceThemeData, IChoice } from "../../types/types";
 
 const initialState: { list: IChoiceThemeData[]; isOverlayShown: boolean } = {
   list: [],
-  isOverlayShown: true,
+  isOverlayShown: false,
 };
 
 export const appSlice = createSlice({
@@ -11,26 +11,41 @@ export const appSlice = createSlice({
   initialState,
   reducers: {
     addChoiceTheme: (state, action: PayloadAction<IChoiceThemeData>) => {
-      state.list.push(action.payload);
+      state.list.unshift(action.payload);
     },
     removeChoiceTheme: (state, action: PayloadAction<string>) => {
       state.list = state.list.filter((entry) => entry.id !== action.payload);
     },
     editChoiceTheme: (
       state,
-      action: PayloadAction<{ id: string; slug: string; name: string }>
+      action: PayloadAction<{ id: string; slug: string; name: string, list: IChoice[] }>
     ) => {
+
       state.list = state.list.map((theme) => {
         if (theme.id === action.payload.id) {
           return {
             ...theme,
             name: action.payload.name,
             slug: action.payload.slug,
+            list: action.payload.list,
+            isEditing: false,
           };
         } else {
           return theme;
         }
       });
+    },
+    setChoiceThemeIsEditing: (state, action: PayloadAction<{id: string, isEditing: boolean}>) => {
+      state.list = state.list.map(entry => {
+        if (entry.id === action.payload.id) {
+          return {
+            ...entry,
+            isEditing: action.payload.isEditing,
+          };
+        } else {
+          return entry;
+        }
+      })
     },
     addChoiceToTheme: (
       state,
@@ -91,30 +106,30 @@ export const appSlice = createSlice({
         }
       });
     },
-    toggleEditHandler: (
-      state,
-      action: PayloadAction<{ themeId: string; choiceId: string }>
-    ) => {
-      state.list = state.list.map((choiceTheme) => {
-        if (choiceTheme.id === action.payload.themeId) {
-          return {
-            ...choiceTheme,
-            list: choiceTheme.list.map((choice) => {
-              if (choice.id === action.payload.choiceId) {
-                return {
-                  ...choice,
-                  isEditing: !choice.isEditing,
-                };
-              } else {
-                return choice;
-              }
-            }),
-          };
-        } else {
-          return choiceTheme;
-        }
-      });
-    },
+    // toggleEditHandler: (
+    //   state,
+    //   action: PayloadAction<{ themeId: string; choiceId: string }>
+    // ) => {
+    //   state.list = state.list.map((choiceTheme) => {
+    //     if (choiceTheme.id === action.payload.themeId) {
+    //       return {
+    //         ...choiceTheme,
+    //         list: choiceTheme.list.map((choice) => {
+    //           if (choice.id === action.payload.choiceId) {
+    //             return {
+    //               ...choice,
+    //               isEditing: !choice.isEditing,
+    //             };
+    //           } else {
+    //             return choice;
+    //           }
+    //         }),
+    //       };
+    //     } else {
+    //       return choiceTheme;
+    //     }
+    //   });
+    // },
     toggleOverlay: (state) => {
       state.isOverlayShown = !state.isOverlayShown;
     },
@@ -134,9 +149,10 @@ export const {
   addChoiceToTheme,
   removeChoiceFromTheme,
   editChoiceInTheme,
-  toggleEditHandler,
+  // toggleEditHandler,
   toggleOverlay,
   showOverlay,
   hideOverlay,
+  setChoiceThemeIsEditing,
 } = appSlice.actions;
 export default appSlice.reducer;

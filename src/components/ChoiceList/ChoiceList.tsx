@@ -36,12 +36,12 @@ const ChoiceList: FC<IChoiceListProps> = ({
               <EditableField
                 className="choice-list__value"
                 isEditable={isEditable}
-                isEditing={entry.isEditing}
+                // isEditing={entry.isEditing}
                 handleEdit={editHandler(entry.id)}
               >
                 {entry.value}
               </EditableField>
-              {isEditable && !entry.isEditing && (
+              {/* {isEditable && !entry.isEditing && (
                 <button
                   className="choice-list__btn"
                   onClick={() => {
@@ -50,7 +50,7 @@ const ChoiceList: FC<IChoiceListProps> = ({
                 >
                   Remove
                 </button>
-              )}
+              )} */}
             </li>
           ))}
         {isEditable && (

@@ -1,7 +1,11 @@
 import { useAppSelector, useAppDispatch } from "../../store/hooks";
 import { IChoice } from "../../types/types";
 import { IChoiceThemeData } from "../../types/types";
-import { removeChoiceTheme } from "../../store/slice/appSlice";
+import {
+  removeChoiceTheme,
+  setChoiceThemeIsEditing,
+  showOverlay,
+} from "../../store/slice/appSlice";
 
 // interface IUseChoiceThemeProps {
 //   choiceThemeId: string;
@@ -13,16 +17,24 @@ interface IUseChoiceTheme {
   slug: string;
   list: IChoice[];
   handleRemove: () => void;
+  handleEditing: () => void;
 }
 
-const useChoiceTheme = ({ id, slug, name, list }: IChoiceThemeData): IUseChoiceTheme => {
+const useChoiceTheme = ({
+  id,
+  slug,
+  name,
+  list,
+}: IChoiceThemeData): IUseChoiceTheme => {
+  const dispatch = useAppDispatch();
 
-  const dispatch = useAppDispatch()
-  
   const handleRemove = () => {
-    dispatch(
-      removeChoiceTheme(id)
-    )
+    dispatch(removeChoiceTheme(id));
+  };
+
+  const handleEditing = () => {
+    dispatch(setChoiceThemeIsEditing({id: id, isEditing: true}));
+    dispatch(showOverlay());
   };
 
   return {
@@ -30,6 +42,7 @@ const useChoiceTheme = ({ id, slug, name, list }: IChoiceThemeData): IUseChoiceT
     slug,
     name,
     list,
+    handleEditing,
   };
 };
 

@@ -9,12 +9,12 @@ interface IThemeFormProps {
   className?: string;
 }
 const ThemeForm: FC<IThemeFormProps> = ({ className }) => {
-  const { handleSubmit, signupSchema, isFormShown, toggleIsFormShown } =
+  const { handleSubmit, signupSchema, initData, isEditing } =
     useThemeForm();
 
   return (
     <Formik
-      initialValues={{ name: "", fieldList: [{ id: "0", value: "" }] }}
+      initialValues={initData}
       validationSchema={signupSchema}
       onSubmit={(values, helpers) => {
         handleSubmit(values);
@@ -23,6 +23,7 @@ const ThemeForm: FC<IThemeFormProps> = ({ className }) => {
     >
       {({ values, errors, touched }) => (
         <Form className={classNames("theme-form", className)}>
+          <p>{isEditing ? "Editing theme" : "Add new theme"}</p>
           <Field
             className="theme-form__name"
             type="text"
