@@ -9,8 +9,7 @@ interface IThemeFormProps {
   className?: string;
 }
 const ThemeForm: FC<IThemeFormProps> = ({ className }) => {
-  const { handleSubmit, signupSchema, initData, isEditing } =
-    useThemeForm();
+  const { handleSubmit, signupSchema, initData, isEditing } = useThemeForm();
 
   return (
     <Formik
@@ -23,7 +22,9 @@ const ThemeForm: FC<IThemeFormProps> = ({ className }) => {
     >
       {({ values, errors, touched }) => (
         <Form className={classNames("theme-form", className)}>
-          <p>{isEditing ? "Editing theme" : "Add new theme"}</p>
+          <p className="theme-form__title">
+            {isEditing ? "Editing theme" : "Add new theme"}
+          </p>
           <Field
             className="theme-form__name"
             type="text"
@@ -70,7 +71,9 @@ const ThemeForm: FC<IThemeFormProps> = ({ className }) => {
               </>
             )}
           </FieldArray>
-          <button className="theme-form__submit-btn btn" type="submit">Submit</button>
+          <button className="theme-form__submit-btn btn" type="submit">
+            Submit
+          </button>
         </Form>
       )}
     </Formik>

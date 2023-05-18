@@ -27,9 +27,8 @@ const ChoiceTheme: FC<IChoiceThemeProps> = ({
           {name}
         </Link>
         <ChoiceList
-          isEditable={false}
           limiter={limiter}
-          themeData={choiceThemeData}
+          list={list}
           className="choice-theme__list"
         />
       </div>

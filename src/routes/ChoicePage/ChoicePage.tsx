@@ -7,17 +7,17 @@ import { GridItem, GridList } from "../../components/GridList";
 interface IChoicePageProps {}
 
 const ChoicePage: FC<IChoicePageProps> = () => {
-  const { choiceThemeData } = useChoicePage();
+  const { list, name } = useChoicePage();
 
   return (
     <>
-      <h2>{choiceThemeData.name}</h2>
+      <h2>{name}</h2>
       <GridList>
         <GridItem>
-          <ChoiceList isEditable={false} themeData={choiceThemeData} />
+          <ChoiceList list={list} />
         </GridItem>
         <GridItem>
-          <RandomPicker choiceList={choiceThemeData.list} />
+          <RandomPicker choiceList={list} />
         </GridItem>
       </GridList>
     </>
