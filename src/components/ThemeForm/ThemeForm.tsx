@@ -25,15 +25,17 @@ const ThemeForm: FC<IThemeFormProps> = ({ className }) => {
           <p className="theme-form__title">
             {isEditing ? "Editing theme" : "Add new theme"}
           </p>
-          <Field
-            className="theme-form__name"
-            type="text"
-            name="name"
-            placeholder="Theme name"
-          />
-          {errors.name && touched.name ? (
-            <span className="theme-form__warn">{errors.name}</span>
-          ) : null}
+          <label className="theme-form__name-wrap">
+            <Field
+              className="theme-form__name"
+              type="text"
+              name="name"
+              placeholder="Theme name"
+            />
+            {errors.name && touched.name ? (
+              <span className="theme-form__warn">{errors.name}</span>
+            ) : null}
+          </label>
           <FieldArray name="fieldList">
             {({ push, remove }) => (
               <>

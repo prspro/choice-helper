@@ -1,27 +1,35 @@
+@import "../../styles/variables"
+
 .theme-form
     background-color: #fff
     padding: 15px
     position: relative
+    $root: &
     & input
         border: none
-        border-bottom: 1px solid #025259
-        border-left: 7px solid #025259
+        border-bottom: 1px solid $primaryColor
+        border-left: 7px solid $primaryColor
         outline: none
         background: none
         min-width: 0px
         padding: 3px
         &:focus
-            background-color: #eee
+            background-color: $secondaryColor
     &__title
         font-size: 1.5em
         font-weight: 700
         margin: 0 0 15px
     &__name
+        display: block
+        & ~ #{$root}__warn
+            margin-top: 5px
+    &__name-wrap
+        display: inline-block
         margin-bottom: 25px
-        // font-size: 1.5em
     &__warn
+        display: inline-block
         font-size: 0.7em
-        color: #f00
+        color: $attentionColor
         padding: 3px
     &__list
         list-style-type: none
@@ -29,12 +37,14 @@
         padding: 0
     &__list-item
         margin-bottom: 8px
+        display: flex
+        align-items: center
         &:last-child
             margin-bottom: 0
     &__remove-btn
         height: 20px
         width: 20px
-        vertical-align: middle
+        // vertical-align: middle
     & &__add-btn
         height: 20px
         width: 20px
