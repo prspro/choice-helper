@@ -7,11 +7,6 @@ import {
   showOverlay,
 } from "../../store/slice/appSlice";
 
-// interface IUseChoiceThemeProps {
-//   choiceThemeId: string;
-//   limiter?: number;
-// }
-
 interface IUseChoiceTheme {
   name: string;
   slug: string;
@@ -33,8 +28,9 @@ const useChoiceTheme = ({
   };
 
   const handleEditing = () => {
-    dispatch(setChoiceThemeIsEditing({id: id, isEditing: true}));
+    dispatch(setChoiceThemeIsEditing({ id: id, isEditing: true }));
     dispatch(showOverlay());
+    document.getElementsByTagName("BODY")[0].classList.add("no-scrollable");
   };
 
   return {

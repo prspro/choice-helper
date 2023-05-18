@@ -14,7 +14,7 @@ const useMainPage = (): IUseMainPage => {
 
   const handleShowForm = () => {
     dispatch(showOverlay());
-    document.getElementsByTagName("BODY")[0].classList.remove("no-scrollable");
+    document.getElementsByTagName("BODY")[0].classList.add("no-scrollable");
   };
 
   return { choiceThemeList, handleShowForm };

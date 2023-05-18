@@ -70,6 +70,7 @@ const useChoiceThemeForm = (): IUseChoiceThemeForm => {
           setChoiceThemeIsEditing({ id: editingTheme.id, isEditing: false })
         );
       }
+      document.getElementsByTagName("BODY")[0].classList.remove("no-scrollable");
     };
   });
 
