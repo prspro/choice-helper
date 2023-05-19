@@ -20,7 +20,6 @@ export const appSlice = createSlice({
       state,
       action: PayloadAction<{ id: string; slug: string; name: string, list: IChoice[] }>
     ) => {
-
       state.list = state.list.map((theme) => {
         if (theme.id === action.payload.id) {
           return {

@@ -11,6 +11,7 @@ interface IUseChoiceTheme {
   name: string;
   slug: string;
   list: IChoice[];
+  color: string;
   handleRemove: () => void;
   handleEditing: () => void;
 }
@@ -20,6 +21,7 @@ const useChoiceTheme = ({
   slug,
   name,
   list,
+  color,
 }: IChoiceThemeData): IUseChoiceTheme => {
   const dispatch = useAppDispatch();
 
@@ -38,6 +40,7 @@ const useChoiceTheme = ({
     slug,
     name,
     list,
+    color,
     handleEditing,
   };
 };

@@ -27,7 +27,7 @@ const ChoiceList: FC<IChoiceListProps> = ({ list, className, limiter }) => {
             </li>
           ))}
         {limiter && limiter < list.length && (
-          <li className="choice-list__item">...</li>
+          <li className="choice-list__item choice-list__item--dots">...</li>
         )}
       </ul>
     </>

@@ -18,10 +18,10 @@ const ChoiceTheme: FC<IChoiceThemeProps> = ({
   choiceThemeData,
   limiter,
 }) => {
-  const { name, slug, list, handleRemove, handleEditing } = useChoiceTheme(choiceThemeData);
+  const { name, slug, list, color, handleRemove, handleEditing } = useChoiceTheme(choiceThemeData);
 
   return (
-    <div className={classNames("choice-theme", className)}>
+    <div className={classNames("choice-theme", color, className)}>
       <div className="choice-theme__info-col">
         <Link className="choice-theme__name" to={`theme/${slug}`}>
           {name}

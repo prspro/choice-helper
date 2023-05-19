@@ -10,6 +10,7 @@ import {
 import slugify from "slugify";
 import { nanoid } from "nanoid";
 import * as Yup from "yup";
+import { getColor } from "../../helpers/appUtils";
 
 interface IUseChoiceThemeForm {
   handleSubmit: (arg: IThemeFormValues) => void;
@@ -49,15 +50,10 @@ const useChoiceThemeForm = (): IUseChoiceThemeForm => {
     : { name: "", fieldList: [{ id: "0", value: "" }] };
   const signupSchema = isEditing
     ? Yup.object().shape({
-        name: Yup.string()
-          // .min(2, 'Too Short!')
-          .max(50, "Too Long!")
-          .required("Required"),
-        // .notOneOf(nameList, "name is already used"),
+        name: Yup.string().max(50, "Too Long!").required("Required"),
       })
     : Yup.object().shape({
         name: Yup.string()
-          // .min(2, 'Too Short!')
           .max(50, "Too Long!")
           .required("Required")
           .notOneOf(nameList, "name is already used"),
@@ -70,7 +66,9 @@ const useChoiceThemeForm = (): IUseChoiceThemeForm => {
           setChoiceThemeIsEditing({ id: editingTheme.id, isEditing: false })
         );
       }
-      document.getElementsByTagName("BODY")[0].classList.remove("no-scrollable");
+      document
+        .getElementsByTagName("BODY")[0]
+        .classList.remove("no-scrollable");
     };
   });
 
@@ -80,6 +78,7 @@ const useChoiceThemeForm = (): IUseChoiceThemeForm => {
       dispatch(
         addChoiceTheme({
           id: nanoid(),
+          color: getColor(),
           slug: slugList.includes(newSlug)
             ? `${nanoid(5)}-${newSlug}`
             : newSlug,
