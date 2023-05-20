@@ -20,11 +20,24 @@ const ChoiceList: FC<IChoiceListProps> = ({
 }) => {
   return (
     <>
-      <ul className={classNames("choice-list", className)}>
+      <ul className={classNames("choice-list", className, {editable: isEditable})}>
         {list
           .filter((entry, idx) => (limiter ? idx < limiter : true))
           .map((entry) => (
             <li key={entry.id} className={classNames("choice-list__item", {active: entry.isActive})}>
+              {isEditable && (
+                <label className="switch choice-list__switch">
+                  <input
+                    type="checkbox"
+                    checked={entry.isActive}
+                    onChange={() =>
+                      handleToggleisActive !== undefined &&
+                      handleToggleisActive(entry.id)
+                    }
+                  />
+                  <span className="switch__slider"></span>
+                </label>
+              )}
               <p
                 className={classNames("choice-list__value", {
                   empty: entry.value === "",
@@ -32,16 +45,6 @@ const ChoiceList: FC<IChoiceListProps> = ({
               >
                 {entry.value === "" ? "Empty" : entry.value}
               </p>
-              {isEditable && (
-                <input
-                  type="checkbox"
-                  checked={entry.isActive}
-                  onChange={() =>
-                    handleToggleisActive !== undefined &&
-                    handleToggleisActive(entry.id)
-                  }
-                />
-              )}
             </li>
           ))}
         {limiter && limiter < list.length && (

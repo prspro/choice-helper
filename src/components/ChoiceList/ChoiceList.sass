@@ -4,10 +4,11 @@
     padding: 0
     list-style-type: none
     list-style-position: inside
+    $root: &
     &__item
         margin: 4px 0
         display: flex
-        border-left: 8px solid #ccc
+        border-left: 8px solid $inactiveColor
         &.active
             border-left-color: $primaryColor
         &--dots
@@ -16,6 +17,12 @@
         padding: 0 5px
         margin: 0
         word-break: break-word
+        flex: 1
         &.empty
-            color: #ccc
+            color: $inactiveColor
+    & &__switch
+        height: auto
+    &.editable
+        #{$root}__item
+            border: none
 

@@ -92,3 +92,45 @@ main
             transform: translate(-50%, -50%)
         &::before
             transform: translate(-50%, -50%) rotate(90deg)
+
+$swithWidth: 8px
+$swithHeight: 100%
+.switch
+    position: relative
+    display: inline-block
+    width: $swithWidth
+    height: $swithHeight
+    $root: &
+    & input
+        opacity: 0
+        width: 0
+        height: 0
+        &:checked + #{$root}__slider
+            background-color: $primaryColor
+        &:focus + #{$root}__slider
+            box-shadow: 0 0 1px $primaryColor
+        &:checked + #{$root}__slider:before
+            // transform: translateY($swithHeight/2)
+            bottom: 1px
+            top: auto
+    &__slider
+        position: absolute
+        cursor: pointer
+        top: 0
+        left: 0
+        right: 0
+        bottom: 0
+        background-color: #ccc
+        -webkit-transition: .4s
+        transition: .4s
+        &::before
+            position: absolute
+            content: ""
+            height: $swithWidth - 2
+            left: 1px
+            right: 1px
+            top: 1px
+            bottom: auto
+            background-color: white
+            -webkit-transition: .4s
+            transition: .4s
