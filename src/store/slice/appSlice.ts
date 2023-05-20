@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IChoiceThemeData, IChoice } from "../../types/types";
+import { log } from "console";
 
 const initialState: { list: IChoiceThemeData[]; isOverlayShown: boolean } = {
   list: [],
@@ -18,7 +19,12 @@ export const appSlice = createSlice({
     },
     editChoiceTheme: (
       state,
-      action: PayloadAction<{ id: string; slug: string; name: string, list: IChoice[] }>
+      action: PayloadAction<{
+        id: string;
+        slug: string;
+        name: string;
+        list: IChoice[];
+      }>
     ) => {
       state.list = state.list.map((theme) => {
         if (theme.id === action.payload.id) {
@@ -34,8 +40,11 @@ export const appSlice = createSlice({
         }
       });
     },
-    setChoiceThemeIsEditing: (state, action: PayloadAction<{id: string, isEditing: boolean}>) => {
-      state.list = state.list.map(entry => {
+    setChoiceThemeIsEditing: (
+      state,
+      action: PayloadAction<{ id: string; isEditing: boolean }>
+    ) => {
+      state.list = state.list.map((entry) => {
         if (entry.id === action.payload.id) {
           return {
             ...entry,
@@ -44,7 +53,7 @@ export const appSlice = createSlice({
         } else {
           return entry;
         }
-      })
+      });
     },
     addChoiceToTheme: (
       state,
@@ -105,30 +114,30 @@ export const appSlice = createSlice({
         }
       });
     },
-    // toggleEditHandler: (
-    //   state,
-    //   action: PayloadAction<{ themeId: string; choiceId: string }>
-    // ) => {
-    //   state.list = state.list.map((choiceTheme) => {
-    //     if (choiceTheme.id === action.payload.themeId) {
-    //       return {
-    //         ...choiceTheme,
-    //         list: choiceTheme.list.map((choice) => {
-    //           if (choice.id === action.payload.choiceId) {
-    //             return {
-    //               ...choice,
-    //               isEditing: !choice.isEditing,
-    //             };
-    //           } else {
-    //             return choice;
-    //           }
-    //         }),
-    //       };
-    //     } else {
-    //       return choiceTheme;
-    //     }
-    //   });
-    // },
+    toggleChoiceIsActive: (
+      state,
+      action: PayloadAction<{ themeId: string; choiceId: string }>
+    ) => {
+      state.list = state.list.map((choiceTheme) => {
+        if (choiceTheme.id === action.payload.themeId) {
+          return {
+            ...choiceTheme,
+            list: choiceTheme.list.map((choice) => {
+              if (choice.id === action.payload.choiceId) {
+                return {
+                  ...choice,
+                  isActive: !choice.isActive,
+                };
+              } else {
+                return choice;
+              }
+            }),
+          };
+        } else {
+          return choiceTheme;
+        }
+      });
+    },
     toggleOverlay: (state) => {
       state.isOverlayShown = !state.isOverlayShown;
     },
@@ -148,7 +157,7 @@ export const {
   addChoiceToTheme,
   removeChoiceFromTheme,
   editChoiceInTheme,
-  // toggleEditHandler,
+  toggleChoiceIsActive,
   toggleOverlay,
   showOverlay,
   hideOverlay,

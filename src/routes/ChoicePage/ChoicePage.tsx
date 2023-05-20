@@ -7,14 +7,14 @@ import { GridItem, GridList } from "../../components/GridList";
 interface IChoicePageProps {}
 
 const ChoicePage: FC<IChoicePageProps> = () => {
-  const { list, name } = useChoicePage();
+  const { list, name, toggleIsActiveItem } = useChoicePage();
 
   return (
     <>
       <h1>{name}</h1>
       <GridList>
         <GridItem>
-          <ChoiceList list={list} />
+          <ChoiceList handleToggleisActive={toggleIsActiveItem} isEditable={true} list={list} />
         </GridItem>
         <GridItem>
           <RandomPicker choiceList={list} />

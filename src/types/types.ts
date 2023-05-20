@@ -10,6 +10,7 @@ export interface IChoiceThemeData {
 export interface IChoice {
   id: string;
   value: string;
+  isActive: boolean;
 }
 
 export interface IThemeFormValues {

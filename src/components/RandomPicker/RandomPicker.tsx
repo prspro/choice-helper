@@ -12,7 +12,7 @@ interface IRandomPickerProps {
 }
 
 const RandomPicker: FC<IRandomPickerProps> = ({ className, choiceList }) => {
-  const { randomChoiceList, handleRandomChoice, isProcessing } =
+  const { randomChoiceList, handleRandomChoice, isProcessing, maxRangeValue } =
     useRandomPicker({
       choiceList,
     });
@@ -30,11 +30,11 @@ const RandomPicker: FC<IRandomPickerProps> = ({ className, choiceList }) => {
               id="rangeValue"
               name="rangeValue"
               min="1"
-              max={choiceList.length}
+              max={maxRangeValue}
               step="1"
             />
             <button type="submit">
-              Get {values.rangeValue} of {choiceList.length}
+              Get {values.rangeValue} of {maxRangeValue}
             </button>
           </Form>
         )}

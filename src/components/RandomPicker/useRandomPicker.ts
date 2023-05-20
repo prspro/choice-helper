@@ -9,17 +9,26 @@ interface IUseRandomPickerProps {
   handleRandomChoice: (arg: number) => void;
   randomChoiceList: IChoice[];
   isProcessing: boolean;
+  maxRangeValue: number;
 }
 
-const useRandomPicker = ({ choiceList }: IUseRandomPicker):IUseRandomPickerProps => {
-  const [randomChoiceList, setRandomChiceList] =
-    useState<IChoice[]>([]);
-  
+const useRandomPicker = ({
+  choiceList,
+}: IUseRandomPicker): IUseRandomPickerProps => {
+  const [randomChoiceList, setRandomChiceList] = useState<IChoice[]>([]);
+
   const [isProcessing, setisProcessing] = useState<boolean>(false);
 
+  const activeChoiceList = choiceList.filter((entry) => entry.isActive);
+
   const getRandomChoices = (n: number) => {
-    return shuffleArray(choiceList).slice(0, n);
+    return shuffleArray(activeChoiceList).slice(
+      0,
+      n
+    );
   };
+
+
 
   const handleRandomChoice = (n: number) => {
     if (!isProcessing) {
@@ -35,6 +44,7 @@ const useRandomPicker = ({ choiceList }: IUseRandomPicker):IUseRandomPickerProps
     handleRandomChoice,
     randomChoiceList,
     isProcessing,
+    maxRangeValue: activeChoiceList.length,
   };
 };
 export default useRandomPicker;

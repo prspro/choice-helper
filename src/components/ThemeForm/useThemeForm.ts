@@ -88,7 +88,7 @@ const useChoiceThemeForm = (): IUseChoiceThemeForm => {
             return {
               id: idx.toString(),
               value: entry.value,
-              isEditing: false,
+              isActive: true,
             };
           }),
         })
@@ -101,7 +101,15 @@ const useChoiceThemeForm = (): IUseChoiceThemeForm => {
             ? `${nanoid(5)}-${newSlug}`
             : newSlug,
           name: value.name,
-          list: value.fieldList,
+          list: value.fieldList.map((entry) => {
+            const isEntryActive =
+              editingTheme.list.find((listItem) => listItem.id === entry.id)
+                ?.isActive || true;
+            return {
+              ...entry,
+              isActive: isEntryActive,
+            };
+          }),
         })
       );
       dispatch(

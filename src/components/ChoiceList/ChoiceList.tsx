@@ -7,9 +7,17 @@ type IChoiceListProps = {
   list: IChoice[];
   className?: string;
   limiter?: number;
+  isEditable?: boolean;
+  handleToggleisActive?: (arg: string) => void;
 };
 
-const ChoiceList: FC<IChoiceListProps> = ({ list, className, limiter }) => {
+const ChoiceList: FC<IChoiceListProps> = ({
+  list,
+  className,
+  limiter,
+  isEditable,
+  handleToggleisActive,
+}) => {
   return (
     <>
       <ul className={classNames("choice-list", className)}>
@@ -24,6 +32,16 @@ const ChoiceList: FC<IChoiceListProps> = ({ list, className, limiter }) => {
               >
                 {entry.value === "" ? "Empty" : entry.value}
               </p>
+              {isEditable && (
+                <input
+                  type="checkbox"
+                  checked={entry.isActive}
+                  onChange={() =>
+                    handleToggleisActive !== undefined &&
+                    handleToggleisActive(entry.id)
+                  }
+                />
+              )}
             </li>
           ))}
         {limiter && limiter < list.length && (
