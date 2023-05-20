@@ -1,8 +1,10 @@
 @import "../../styles/variables"
 
+$rangeSliderHeight: 15px
 .random-picker
     &__range-form
         display: flex
+        align-items: center
         margin-bottom: 5px
         & input
             margin-right: 20px
@@ -37,6 +39,25 @@
         padding: 5px
         box-sizing: border-box
         cursor: pointer
+    &__range-slider
+        -webkit-appearance: none
+        // width: 100%
+        height: $rangeSliderHeight
+        background: $primaryColor
+        outline: none
+        border: 1px solid $primaryColor
+        &::-webkit-slider-thumb
+            -webkit-appearance: none
+            appearance: none
+            width: $rangeSliderHeight
+            height: $rangeSliderHeight
+            background: $secondaryColor
+            cursor: pointer
+        &::-moz-range-thumb
+            width: $rangeSliderHeight
+            height: $rangeSliderHeight
+            background: $secondaryColor
+            cursor: pointer
 
 @keyframes lds-ring
     0%

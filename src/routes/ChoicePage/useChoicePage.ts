@@ -31,9 +31,6 @@ const useChoicePage = (): IUseChoicePage => {
   const name = themeData?.name || "";
 
   const toggleIsActiveItem = (id: string) => {
-    console.log(id);
-    console.log(themeData?.id);
-    
     dispatch(
       toggleChoiceIsActive({ themeId: themeData?.id || "", choiceId: id })
     );

@@ -26,6 +26,7 @@ const RandomPicker: FC<IRandomPickerProps> = ({ className, choiceList }) => {
         {({ values }) => (
           <Form className="random-picker__range-form">
             <Field
+              className="random-picker__range-slider"
               type="range"
               id="rangeValue"
               name="rangeValue"

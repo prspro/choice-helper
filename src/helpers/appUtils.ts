@@ -9,6 +9,6 @@ export function shuffleArray(array: any[]) {
 }
 
 export function getColor() {
-  const colorList = ["color1", "color2", "color3", ""];
+  const colorList = ["color1", "color2", "color3"];
   return shuffleArray(colorList)[0];
 }
