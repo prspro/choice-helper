@@ -12,9 +12,10 @@ interface IRandomPickerProps {
 }
 
 const RandomPicker: FC<IRandomPickerProps> = ({ className, choiceList }) => {
-  const { randomChoiceList, handleRandomChoice } = useRandomPicker({
-    choiceList,
-  });
+  const { randomChoiceList, handleRandomChoice, isProcessing } =
+    useRandomPicker({
+      choiceList,
+    });
 
   return (
     <div className={classNames("random-picker", className)}>
@@ -38,7 +39,16 @@ const RandomPicker: FC<IRandomPickerProps> = ({ className, choiceList }) => {
           </Form>
         )}
       </Formik>
-      <ChoiceList list={randomChoiceList} />
+      {isProcessing ? (
+        <div className="random-picker__lds-ring">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      ) : (
+        <ChoiceList list={randomChoiceList} />
+      )}
     </div>
   );
 };
