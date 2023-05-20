@@ -24,7 +24,7 @@ const ChoiceList: FC<IChoiceListProps> = ({
         {list
           .filter((entry, idx) => (limiter ? idx < limiter : true))
           .map((entry) => (
-            <li key={entry.id} className="choice-list__item">
+            <li key={entry.id} className={classNames("choice-list__item", {active: entry.isActive})}>
               <p
                 className={classNames("choice-list__value", {
                   empty: entry.value === "",

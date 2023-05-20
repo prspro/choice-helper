@@ -36,7 +36,7 @@ const useRandomPicker = ({
       setTimeout(() => {
         setRandomChiceList(getRandomChoices(n));
         setisProcessing(false);
-      }, 1000);
+      }, 700);
     }
   };
 

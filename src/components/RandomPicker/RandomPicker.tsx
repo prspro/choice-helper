@@ -34,7 +34,7 @@ const RandomPicker: FC<IRandomPickerProps> = ({ className, choiceList }) => {
               step="1"
             />
             <button type="submit">
-              Get {values.rangeValue} of {maxRangeValue}
+              Get {Math.min(values.rangeValue, maxRangeValue)} of {maxRangeValue}
             </button>
           </Form>
         )}
