@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IChoiceThemeData, IChoice } from "../../types/types";
-import { log } from "console";
 
 const initialState: { list: IChoiceThemeData[]; isOverlayShown: boolean } = {
   list: [],

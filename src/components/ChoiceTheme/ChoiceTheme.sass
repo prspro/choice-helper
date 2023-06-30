@@ -25,18 +25,12 @@
         width: 30px
         display: block
         margin-bottom: 10px
-    &.color1
-        border-left-color: $themeRandomColor1
-        #{$root}__list
-            & > *
-                border-left-color: $themeRandomColor1
-    &.color2
-        border-left-color: $themeRandomColor2
-        #{$root}__list
-            & > *
-                border-left-color: $themeRandomColor2
-    &.color3
-        border-left-color: $themeRandomColor3
-        #{$root}__list
-            & > *
-                border-left-color: $themeRandomColor3
+    @each $color in $themeRandomColorList
+        $i: index($themeRandomColorList, $color)
+        &.color#{$i}
+            border-left-color: $color
+            #{$root}__list
+                & > *
+                    border-left-color: $color
+
+

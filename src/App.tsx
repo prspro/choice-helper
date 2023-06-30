@@ -12,6 +12,9 @@ function App() {
       <header>
         <Container>
           <Link to="/">Choice helper</Link>
+          <Routes>
+            <Route path="/" element={<>123</>} />
+          </Routes>
         </Container>
       </header>
       <main>
