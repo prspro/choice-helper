@@ -8,6 +8,7 @@ import thunk from 'redux-thunk';
 const persistConfig = {
   key: 'app',
   storage,
+  blacklist: ["isOverlayShown"],
 };
 
 const persistedReducer = persistReducer(persistConfig, appReducer);
