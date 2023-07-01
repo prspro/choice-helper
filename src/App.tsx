@@ -11,7 +11,7 @@ function App() {
   return (
     <>
       <header>
-        <Container>
+        <Container isFlex={true}>
           <Link to="/">Choice helper</Link>
           <Routes>
             <Route path="/" element={<Search />} />

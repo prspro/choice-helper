@@ -1,1 +1,76 @@
+@import "../../styles/variables"
+@import "../../styles/breakpoints"
+$padding: 5px
+$wrapSize: 20px
 .search
+    $root: &
+    margin-left: auto
+    line-height: 1
+    padding: $padding
+    transition: all .5s
+    width: $wrapSize
+    position: relative
+    &.active
+        @media (min-width: $breakpoint-lg)
+            width: 300px
+        background-color: $secondaryColor
+        #{$root}__icon
+            fill: $primaryColor
+        #{$root}__input
+            color: $primaryColor
+            &::placeholder
+                color: $primaryColor
+        #{$root}__button
+            cursor: auto
+    &__button
+        cursor: pointer
+        height: $wrapSize
+        width: $wrapSize
+        outline: none
+        border: none
+        background: none
+        padding: 0
+        margin: 0
+        flex: none
+    &__icon
+        fill: $secondaryColor
+    &__input
+        padding: 0
+        outline: none
+        border: none
+        background: none
+        color: $secondaryColor
+        flex: 1
+        &::placeholder
+            color: $secondaryColor
+    &__result-list
+        position: absolute
+        left: 0
+        right: 0
+        top: 100%
+        background-color: $secondaryColor
+        margin: 0
+        padding: 0
+        list-style-type: none
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25)
+        z-index: -1
+        border-top: 1px solid $primaryColor
+    &__result-item
+        padding: 5px
+        & a
+            display: block
+            color: $primaryColor
+    & form
+        margin-left: $padding
+    &__form-wrap
+        display: flex
+        align-items: center
+        overflow: hidden
+        line-height: 1
+    &__clear-btn
+        height: $wrapSize
+        width: $wrapSize
+    &__link
+        font-size: 1.5rem
+        font-weight: 700
+
