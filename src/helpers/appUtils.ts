@@ -20,6 +20,10 @@ export function getColor() {
     "color8",
     "color9",
     "color10",
+    "color11",
+    "color12",
+    "color13",
+    "color14",
   ];
   return shuffleArray(colorList)[0];
 }

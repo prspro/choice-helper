@@ -5,6 +5,7 @@ import ErrorPage from "./routes/ErrorPage";
 import ChoicePage from "./routes/ChoicePage";
 import Overlay from "./components/Overlay";
 import ThemeForm from "./components/ThemeForm";
+import Search from "./components/search";
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
         <Container>
           <Link to="/">Choice helper</Link>
           <Routes>
-            <Route path="/" element={<>123</>} />
+            <Route path="/" element={<Search />} />
           </Routes>
         </Container>
       </header>
