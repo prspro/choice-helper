@@ -2,7 +2,11 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) TS template.
 
-## Design
+## GitHub Pages link
+
+https://prspro.github.io/choice-helper/
+
+## Design reference
 
 https://www.figma.com/file/MjNtBOzLr4JFu0hjVcisxZ/Untitled?type=design
 
