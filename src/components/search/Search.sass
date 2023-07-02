@@ -4,16 +4,14 @@ $padding: 5px
 $wrapSize: 20px
 .search
     $root: &
+    display: flex
+    align-items: center
     margin-left: auto
     line-height: 1
-    padding: $padding
-    transition: all .5s
     width: $wrapSize
     position: relative
+    height: $wrapSize + $padding * 2
     &.active
-        @media (min-width: $breakpoint-lg)
-            width: 300px
-        background-color: $secondaryColor
         #{$root}__icon
             fill: $primaryColor
         #{$root}__input
@@ -22,6 +20,12 @@ $wrapSize: 20px
                 color: $primaryColor
         #{$root}__button
             cursor: auto
+        #{$root}__form-wrap
+            background-color: #fff
+            width: auto
+            @media (min-width: $breakpoint-md)
+                width: 300px
+            overflow: visible
     &__button
         cursor: pointer
         height: $wrapSize
@@ -32,15 +36,20 @@ $wrapSize: 20px
         padding: 0
         margin: 0
         flex: none
+        position: relative
+        z-index: 1
     &__icon
         fill: $secondaryColor
     &__input
+        display: block
         padding: 0
         outline: none
         border: none
         background: none
         color: $secondaryColor
         flex: 1
+        height: 100%
+        font-size: 1rem
         &::placeholder
             color: $secondaryColor
     &__result-list
@@ -60,17 +69,27 @@ $wrapSize: 20px
         & a
             display: block
             color: $primaryColor
-    & form
-        margin-left: $padding
+    &__form
+        margin: 0 $padding
+        width: 100%
+        height: 100%
+        display: block
     &__form-wrap
         display: flex
         align-items: center
         overflow: hidden
         line-height: 1
+        width: $wrapSize
+        position: absolute
+        right: 0
+        top: 0
+        bottom: 0
+        transition: all .5s
+        padding: $padding
+        box-sizing: border-box
     &__clear-btn
         height: $wrapSize
         width: $wrapSize
     &__link
         font-size: 1.5rem
         font-weight: 700
-

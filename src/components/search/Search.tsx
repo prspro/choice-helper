@@ -18,16 +18,17 @@ const Search: FC<ISearch> = ({ className }) => {
     editInputValueHandler,
     clearInputValueHandler,
     inputRef,
+    searchWrapRef,
     searchList,
   } = useSearch();
 
   return (
     <div className={classNames("search", className, { active: isActive })}>
-      <div className="search__form-wrap">
+      <div className="search__form-wrap" ref={searchWrapRef}>
         <button className="search__button" onClick={openSearchHandler}>
           <SVGicon id="magnifier" className="search__icon" />
         </button>
-        <form>
+        <form className="search__form">
           <input
             ref={inputRef}
             type="text"
@@ -42,18 +43,18 @@ const Search: FC<ISearch> = ({ className }) => {
           className="search__clear-btn btn btn--remove"
           onClick={clearInputValueHandler}
         ></button>
+        {searchList && (
+          <ul className="search__result-list">
+            {searchList.map((entry) => (
+              <li key={entry.id} className="search__result-item">
+                <Link className="search__link" to={`theme/${entry.slug}`}>
+                  {entry.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
-      {searchList && (
-        <ul className="search__result-list">
-          {searchList.map((entry) => (
-            <li key={entry.id} className="search__result-item">
-              <Link className="search__link" to={`theme/${entry.slug}`}>
-                {entry.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useAppSelector } from "../../store/hooks";
 
 interface ISearchLink {
@@ -16,10 +16,12 @@ interface IUseSearch {
   editInputValueHandler: () => void;
   clearInputValueHandler: () => void;
   inputRef: React.RefObject<HTMLInputElement>;
+  searchWrapRef: React.RefObject<HTMLDivElement>;
 }
 
 const useSearch = (): IUseSearch => {
   const inputRef = useRef<HTMLInputElement>(null);
+  const searchWrapRef = useRef<HTMLDivElement>(null);
   const linkList =
     useAppSelector((state) => state.list).map((entry) => {
       return {
@@ -32,6 +34,37 @@ const useSearch = (): IUseSearch => {
   const [isActive, setIsactive] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState<string>("");
   const [searchList, setSearchList] = useState<ISearchLink[]>([]);
+  const [searchWrapWidth, setSearchWrapWidth] = useState<number>(0);
+
+  useEffect(() => {
+    const resizeHandler = () => {
+      setSearchWrapWidth(
+        document.querySelector("header .container")?.getBoundingClientRect()
+          .width || 0
+      );
+    };
+
+    resizeHandler();
+
+    window.addEventListener("resize", resizeHandler);
+    return () => {
+      window.removeEventListener("resize", resizeHandler);
+    };
+  }, [isActive]);
+
+  useEffect(() => {
+    if (searchWrapWidth < 768) {
+      if (isActive) {
+        searchWrapRef.current &&
+          (searchWrapRef.current.style.width = searchWrapWidth + "px");
+      } else {
+        searchWrapRef.current &&
+          (searchWrapRef.current.style.width = "25px");
+      }
+    } else {
+      searchWrapRef.current && searchWrapRef.current.removeAttribute("style");
+    }
+  }, [searchWrapWidth, isActive]);
 
   const openSearchHandler = () => {
     setIsactive(true);
@@ -72,6 +105,7 @@ const useSearch = (): IUseSearch => {
     inputRef,
     searchValue,
     searchList,
+    searchWrapRef,
   };
 };
 
