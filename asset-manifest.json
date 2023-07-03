@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/choice-helper/static/css/main.bdb96dcc.css",
-    "main.js": "/choice-helper/static/js/main.095028d4.js",
+    "main.css": "/choice-helper/static/css/main.760e86af.css",
+    "main.js": "/choice-helper/static/js/main.fcb5d70a.js",
     "static/media/roboto-v30-latin-700.svg": "/choice-helper/static/media/roboto-v30-latin-700.9cc0e6124996a8989420.svg",
     "static/media/roboto-v30-latin-regular.svg": "/choice-helper/static/media/roboto-v30-latin-regular.4f862c8ba4ed785461ee.svg",
     "static/media/roboto-v30-latin-regular.ttf": "/choice-helper/static/media/roboto-v30-latin-regular.6b1ef4e4ab8eafee13c1.ttf",
@@ -14,11 +14,11 @@
     "static/media/roboto-v30-latin-regular.woff2": "/choice-helper/static/media/roboto-v30-latin-regular.b009a76ad6afe4ebd301.woff2",
     "static/media/sprite.svg": "/choice-helper/static/media/sprite.e4d06a01a5edc746f2d018c8981d51bd.svg",
     "index.html": "/choice-helper/index.html",
-    "main.bdb96dcc.css.map": "/choice-helper/static/css/main.bdb96dcc.css.map",
-    "main.095028d4.js.map": "/choice-helper/static/js/main.095028d4.js.map"
+    "main.760e86af.css.map": "/choice-helper/static/css/main.760e86af.css.map",
+    "main.fcb5d70a.js.map": "/choice-helper/static/js/main.fcb5d70a.js.map"
   },
   "entrypoints": [
-    "static/css/main.bdb96dcc.css",
-    "static/js/main.095028d4.js"
+    "static/css/main.760e86af.css",
+    "static/js/main.fcb5d70a.js"
   ]
 }
