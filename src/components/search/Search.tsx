@@ -24,7 +24,12 @@ const Search: FC<ISearch> = ({ className }) => {
 
   return (
     <div className={classNames("search", className, { active: isActive })}>
-      <div className="search__form-wrap" ref={searchWrapRef}>
+      <div
+        className={classNames("search__form-wrap", {
+          "search__form-wrap--unoverflowed": searchList.length > 0,
+        })}
+        ref={searchWrapRef}
+      >
         <button className="search__button" onClick={openSearchHandler}>
           <SVGicon id="magnifier" className="search__icon" />
         </button>
@@ -43,7 +48,7 @@ const Search: FC<ISearch> = ({ className }) => {
           className="search__clear-btn btn btn--remove"
           onClick={clearInputValueHandler}
         ></button>
-        {searchList && (
+        {searchList.length > 0 && (
           <ul className="search__result-list">
             {searchList.map((entry) => (
               <li key={entry.id} className="search__result-item">

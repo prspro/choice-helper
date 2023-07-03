@@ -25,7 +25,7 @@ $wrapSize: 20px
             width: auto
             @media (min-width: $breakpoint-md)
                 width: 300px
-            overflow: visible
+            // overflow: visible
     &__button
         cursor: pointer
         height: $wrapSize
@@ -87,6 +87,8 @@ $wrapSize: 20px
         transition: all .5s
         padding: $padding
         box-sizing: border-box
+        &--unoverflowed
+            overflow: visible
     &__clear-btn
         height: $wrapSize
         width: $wrapSize

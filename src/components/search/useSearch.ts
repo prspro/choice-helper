@@ -59,7 +59,7 @@ const useSearch = (): IUseSearch => {
           (searchWrapRef.current.style.width = searchWrapWidth + "px");
       } else {
         searchWrapRef.current &&
-          (searchWrapRef.current.style.width = "25px");
+          (searchWrapRef.current.style.width = "30px");
       }
     } else {
       searchWrapRef.current && searchWrapRef.current.removeAttribute("style");
@@ -83,7 +83,10 @@ const useSearch = (): IUseSearch => {
       inputRef.current?.value !== ""
         ? linkList
             .filter((entry) =>
-              entry.name.includes(inputRef.current?.value || "")
+              {
+                const regex = new RegExp(`${inputRef.current?.value}`, "i")
+                return entry.name.match(regex)
+              }
             )
             .slice(0, 5)
         : []
@@ -91,8 +94,10 @@ const useSearch = (): IUseSearch => {
   };
 
   const clearInputValueHandler = () => {
-    setSearchValue("");
-    inputRef.current?.focus();
+    if (searchValue !== "") {
+      setSearchValue("");
+      inputRef.current?.focus();
+    };
     setSearchList([]);
   };
 
