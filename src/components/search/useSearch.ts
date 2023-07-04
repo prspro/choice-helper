@@ -50,7 +50,7 @@ const useSearch = (): IUseSearch => {
     return () => {
       window.removeEventListener("resize", resizeHandler);
     };
-  }, [isActive]);
+  }, []);
 
   useEffect(() => {
     if (searchWrapWidth < 768) {
