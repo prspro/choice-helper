@@ -4,13 +4,18 @@ import MainPage from "./routes/MainPage";
 import ErrorPage from "./routes/ErrorPage";
 import ChoicePage from "./routes/ChoicePage";
 import Overlay from "./components/Overlay";
+import ThemeForm from "./components/ThemeForm";
+import Search from "./components/search";
 
 function App() {
   return (
     <>
       <header>
-        <Container>
+        <Container isFlex={true}>
           <Link to="/">Choice helper</Link>
+          <Routes>
+            <Route path="/" element={<Search />} />
+          </Routes>
         </Container>
       </header>
       <main>
@@ -28,10 +33,14 @@ function App() {
             to="https://github.com/prspro/choice-helper"
             rel="noreferrer"
             target="_blank"
-          >GitHub</Link>
+          >
+            GitHub
+          </Link>
         </Container>
       </footer>
-      <Overlay />
+      <Overlay>
+        <ThemeForm />
+      </Overlay>
     </>
   );
 }

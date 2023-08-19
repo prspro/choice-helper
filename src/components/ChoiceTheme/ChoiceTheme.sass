@@ -1,18 +1,36 @@
+@import "../../styles/variables"
+
 .choice-theme
+    $root: &
     padding: 15px
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25)
     display: flex
-    flex-direction: column
-    border-left: 10px solid #025259
+    display: flex
+    border-left: 10px solid $primaryColor
+    &__info-col
+        flex: 1
+        padding-right: 20px
+    &__btn-col
     &__name
         text-decoration: none
         display: inline-block
-        margin-bottom: 10px
         font-size: 2em
         font-weight: 700
         color: #000
+        word-break: break-word
     &__list
         flex: 1
-    &__remove-btn
-        font-size: 0.7em
-        float: right
+    & &__remove-btn, & &__edit-btn
+        height: 30px
+        width: 30px
+        display: block
+        margin-bottom: 10px
+    @each $color in $themeRandomColorList
+        $i: index($themeRandomColorList, $color)
+        &.color#{$i}
+            border-left-color: $color
+            #{$root}__list
+                & > *
+                    border-left-color: $color
+
+

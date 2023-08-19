@@ -1,67 +1,54 @@
 import { FC } from "react";
 import "./ChoiceList.sass";
-import useChoiceList from "./useChoiceList";
 import classNames from "classnames";
-// import ChoiceItem from "../ChoiceItem/ChoiceItem";
-import { IChoiceThemeData } from "../../types/types";
-import EditableField from "../EditableField";
+import { IChoice } from "../../types/types";
 
 type IChoiceListProps = {
-  themeData: IChoiceThemeData;
+  list: IChoice[];
   className?: string;
   limiter?: number;
-  isEditable: boolean;
+  isEditable?: boolean;
+  handleToggleisActive?: (arg: string) => void;
 };
 
 const ChoiceList: FC<IChoiceListProps> = ({
-  themeData,
+  list,
   className,
   limiter,
   isEditable,
+  handleToggleisActive,
 }) => {
-  const {
-    list,
-    removeHandler,
-    editHandler,
-    addItemHandler,
-  } = useChoiceList(themeData);
-
   return (
     <>
-      <ul className={classNames("choice-list", className)}>
+      <ul className={classNames("choice-list", className, {editable: isEditable})}>
         {list
           .filter((entry, idx) => (limiter ? idx < limiter : true))
           .map((entry) => (
-            <li key={entry.id} className="choice-list__item">
-              <EditableField
-                className="choice-list__value"
-                isEditable={isEditable}
-                isEditing={entry.isEditing}
-                handleEdit={editHandler(entry.id)}
-              >
-                {entry.value}
-              </EditableField>
-              {isEditable && !entry.isEditing && (
-                <button
-                  className="choice-list__btn"
-                  onClick={() => {
-                    removeHandler(entry.id);
-                  }}
-                >
-                  Remove
-                </button>
+            <li key={entry.id} className={classNames("choice-list__item", {active: entry.isActive})}>
+              {isEditable && (
+                <label className="switch choice-list__switch">
+                  <input
+                    type="checkbox"
+                    checked={entry.isActive}
+                    onChange={() =>
+                      handleToggleisActive !== undefined &&
+                      handleToggleisActive(entry.id)
+                    }
+                  />
+                  <span className="switch__slider"></span>
+                </label>
               )}
+              <p
+                className={classNames("choice-list__value", {
+                  empty: entry.value === "",
+                })}
+              >
+                {entry.value === "" ? "Empty" : entry.value}
+              </p>
             </li>
           ))}
-        {isEditable && (
-          <li>
-            <button className="choice-list__btn" onClick={addItemHandler}>
-              Add
-            </button>
-          </li>
-        )}
         {limiter && limiter < list.length && (
-          <li className="choice-list__item">...</li>
+          <li className="choice-list__item choice-list__item--dots">...</li>
         )}
       </ul>
     </>

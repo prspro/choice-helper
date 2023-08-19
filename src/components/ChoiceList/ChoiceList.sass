@@ -1,14 +1,28 @@
+@import "../../styles/variables"
+
 .choice-list
-    // border: 1px solid #000
     padding: 0
     list-style-type: none
     list-style-position: inside
-    // background-color: #eee
+    $root: &
     &__item
-        margin: 3px 0
+        margin: 4px 0
+        display: flex
+        border-left: 8px solid $inactiveColor
+        &.active
+            border-left-color: $primaryColor
+        &--dots
+            border: none
     &__value
-        // background-color: #eee
         padding: 0 5px
-        border-left: 8px solid #025259
-    &__btn
-    
+        margin: 0
+        word-break: break-word
+        flex: 1
+        &.empty
+            color: $inactiveColor
+    & &__switch
+        height: auto
+    &.editable
+        #{$root}__item
+            border: none
+

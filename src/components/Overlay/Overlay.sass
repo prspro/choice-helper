@@ -1,3 +1,5 @@
+@import "../../styles/variables"
+
 .overlay
     position: fixed
     top: 0
@@ -12,3 +14,19 @@
     &.shown
         visibility: visible
         opacity: .65
+    &__box
+        position: fixed
+        max-width: 90%
+        max-height: 90%
+        z-index: 11
+        top: 50%
+        left: 50%
+        transform: translate(-50%, -50%)
+        overflow-y: auto
+        overflow-x: hidden 
+        &::-webkit-scrollbar
+            width: 8px
+        &::-webkit-scrollbar-track
+            background: #f1f1f1
+        &::-webkit-scrollbar-thumb
+            background: $primaryColor

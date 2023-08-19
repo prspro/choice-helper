@@ -3,21 +3,20 @@ import ChoiceTheme from "../../components/ChoiceTheme";
 import classNames from "classnames";
 import useMainPage from "./useMainPage";
 import { GridItem, GridList } from "../../components/GridList";
-import ChoiceThemeForm from "../../components/ChoiceThemeForm";
 
 interface IMainPageProps {
   className?: string;
 }
 
 const MainPage: FC<IMainPageProps> = ({ className }) => {
-  const { choiceThemeList } = useMainPage();
+  const { choiceThemeList, handleShowForm } = useMainPage();
 
   return (
     <>
       <GridList className={classNames(className)}>
         <>
           <GridItem>
-            <ChoiceThemeForm />
+            <button className="btn btn--add-theme" onClick={handleShowForm}></button>
           </GridItem>
           {choiceThemeList.map((entry) => (
             <GridItem key={entry.id}>

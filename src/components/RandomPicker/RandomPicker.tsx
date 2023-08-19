@@ -4,6 +4,7 @@ import { IChoice } from "../../types/types";
 import useRandomPicker from "./useRandomPicker";
 import "./RandomPicker.sass";
 import { Formik, Form, Field } from "formik";
+import ChoiceList from "../ChoiceList";
 
 interface IRandomPickerProps {
   className?: string;
@@ -11,32 +12,44 @@ interface IRandomPickerProps {
 }
 
 const RandomPicker: FC<IRandomPickerProps> = ({ className, choiceList }) => {
-  const { randomChoiceList, handleRandomChoice } = useRandomPicker({
-    choiceList,
-  });
+  const { randomChoiceList, handleRandomChoice, isProcessing, maxRangeValue } =
+    useRandomPicker({
+      choiceList,
+    });
 
   return (
     <div className={classNames("random-picker", className)}>
-      <Formik initialValues={{ rangeValue: 1 }} onSubmit={({rangeValue}) => handleRandomChoice(rangeValue)}>
-        {({values}) => (
-          <Form>
+      <Formik
+        initialValues={{ rangeValue: 1 }}
+        onSubmit={({ rangeValue }) => handleRandomChoice(rangeValue)}
+      >
+        {({ values }) => (
+          <Form className="random-picker__range-form">
             <Field
+              className="random-picker__range-slider"
               type="range"
               id="rangeValue"
               name="rangeValue"
               min="1"
-              max={choiceList.length}
+              max={maxRangeValue}
               step="1"
             />
-            <button type="submit">Get {values.rangeValue} of {choiceList.length}</button>
+            <button type="submit" className="btn random-picker__btn">
+              Get {Math.min(values.rangeValue, maxRangeValue)} of {maxRangeValue}
+            </button>
           </Form>
         )}
       </Formik>
-      <ul className="random-picker__list">
-        {randomChoiceList.map((entry) => (
-          <li key={entry.id}>{entry.value}</li>
-        ))}
-      </ul>
+      {isProcessing ? (
+        <div className="random-picker__lds-ring">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      ) : (
+        <ChoiceList list={randomChoiceList} />
+      )}
     </div>
   );
 };

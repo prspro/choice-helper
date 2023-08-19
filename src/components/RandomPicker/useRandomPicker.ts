@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { IChoice } from "../../types/types";
+import { shuffleArray } from "../../helpers/appUtils";
 
 interface IUseRandomPicker {
   choiceList: IChoice[];
@@ -7,30 +8,43 @@ interface IUseRandomPicker {
 interface IUseRandomPickerProps {
   handleRandomChoice: (arg: number) => void;
   randomChoiceList: IChoice[];
+  isProcessing: boolean;
+  maxRangeValue: number;
 }
 
-const useRandomPicker = ({ choiceList }: IUseRandomPicker):IUseRandomPickerProps => {
-  const [randomChoiceList, setRandomChiceList] =
-    useState<IChoice[]>([]);
+const useRandomPicker = ({
+  choiceList,
+}: IUseRandomPicker): IUseRandomPickerProps => {
+  const [randomChoiceList, setRandomChiceList] = useState<IChoice[]>([]);
+
+  const [isProcessing, setisProcessing] = useState<boolean>(false);
+
+  const activeChoiceList = choiceList.filter((entry) => entry.isActive);
 
   const getRandomChoices = (n: number) => {
-    const listCopy = choiceList.map((entry) => {
-      return { ...entry };
-    });
-    for (let i = listCopy.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [listCopy[i], listCopy[j]] = [listCopy[j], listCopy[i]];
-    }
-    return listCopy.slice(0, n);
+    return shuffleArray(activeChoiceList).slice(
+      0,
+      n
+    );
   };
 
+
+
   const handleRandomChoice = (n: number) => {
-    setRandomChiceList(getRandomChoices(n));
+    if (!isProcessing) {
+      setisProcessing(true);
+      setTimeout(() => {
+        setRandomChiceList(getRandomChoices(n));
+        setisProcessing(false);
+      }, 700);
+    }
   };
 
   return {
     handleRandomChoice,
     randomChoiceList,
+    isProcessing,
+    maxRangeValue: activeChoiceList.length,
   };
 };
 export default useRandomPicker;

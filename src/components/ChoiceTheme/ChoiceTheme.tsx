@@ -5,6 +5,7 @@ import classNames from "classnames";
 import useChoiceTheme from "./useChoiceTheme";
 import ChoiceList from "../ChoiceList";
 import { IChoiceThemeData } from "../../types/types";
+import SVGicon from "../SVGicon/SVGicon";
 
 interface IChoiceThemeProps {
   className?: string;
@@ -17,24 +18,29 @@ const ChoiceTheme: FC<IChoiceThemeProps> = ({
   choiceThemeData,
   limiter,
 }) => {
-  const { name, slug, list, handleRemove } = useChoiceTheme(choiceThemeData);
+  const { name, slug, list, color, handleRemove, handleEditing } = useChoiceTheme(choiceThemeData);
 
   return (
-    <div className={classNames("choice-theme", className)}>
-      <div className="choice-theme__upper-bar">
+    <div className={classNames("choice-theme", color, className)}>
+      <div className="choice-theme__info-col">
         <Link className="choice-theme__name" to={`theme/${slug}`}>
           {name}
         </Link>
-        <button className="choice-theme__remove-btn" onClick={handleRemove}>
-          Remove
+        <ChoiceList
+          limiter={limiter}
+          list={list}
+          className="choice-theme__list"
+        />
+      </div>
+      <div className="choice-theme__btn-col">
+        <button
+          className="choice-theme__remove-btn btn btn--remove"
+          onClick={handleRemove}
+        ></button>
+        <button onClick={handleEditing} className="choice-theme__edit-btn btn">
+          <SVGicon id="edit" />
         </button>
       </div>
-      <ChoiceList
-        isEditable={false}
-        limiter={limiter}
-        themeData={choiceThemeData}
-        className="choice-theme__list"
-      />
     </div>
   );
 };
