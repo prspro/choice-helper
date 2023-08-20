@@ -14,13 +14,11 @@ const container = document.getElementById("root")!;
 const root = createRoot(container);
 
 root.render(
-    <Provider store={store}>
-      <PersistGate persistor={persistor}>
-        <Router basename={"/"}>
-          <App />
-        </Router>
-      </PersistGate>
-    </Provider>
-  // <React.StrictMode>
-  // </React.StrictMode>
+  <Provider store={store}>
+    <PersistGate persistor={persistor}>
+      <Router basename={"/"}>
+        <App />
+      </Router>
+    </PersistGate>
+  </Provider>
 );

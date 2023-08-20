@@ -91,6 +91,7 @@ const useChoiceThemeForm = (): IUseChoiceThemeForm => {
               isActive: true,
             };
           }),
+          choiceStoryList: [],
         })
       );
     } else {

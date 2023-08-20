@@ -1,6 +1,6 @@
 import { FC } from "react";
 import classNames from "classnames";
-import { IChoice } from "../../types/types";
+import { IChoice, IChoiceStory } from "../../types/types";
 import useRandomPicker from "./useRandomPicker";
 import "./RandomPicker.sass";
 import { Formik, Form, Field } from "formik";
@@ -9,12 +9,18 @@ import ChoiceList from "../ChoiceList";
 interface IRandomPickerProps {
   className?: string;
   choiceList: IChoice[];
+  storyUpdateHandler?: (arg: IChoiceStory) => void;
 }
 
-const RandomPicker: FC<IRandomPickerProps> = ({ className, choiceList }) => {
+const RandomPicker: FC<IRandomPickerProps> = ({
+  className,
+  choiceList,
+  storyUpdateHandler,
+}) => {
   const { randomChoiceList, handleRandomChoice, isProcessing, maxRangeValue } =
     useRandomPicker({
       choiceList,
+      storyUpdateHandler,
     });
 
   return (
@@ -35,7 +41,8 @@ const RandomPicker: FC<IRandomPickerProps> = ({ className, choiceList }) => {
               step="1"
             />
             <button type="submit" className="btn random-picker__btn">
-              Get {Math.min(values.rangeValue, maxRangeValue)} of {maxRangeValue}
+              Get {Math.min(values.rangeValue, maxRangeValue)} of{" "}
+              {maxRangeValue}
             </button>
           </Form>
         )}
