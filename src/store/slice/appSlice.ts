@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IChoiceThemeData, IChoice } from "../../types/types";
+import { IChoiceThemeData, IChoice, IChoiceStory } from "../../types/types";
 
 const initialState: { list: IChoiceThemeData[]; isOverlayShown: boolean } = {
   list: [],
@@ -146,6 +146,24 @@ export const appSlice = createSlice({
     hideOverlay: (state) => {
       state.isOverlayShown = false;
     },
+    updateChoiceStory: (
+      state,
+      action: PayloadAction<{ themeId: string; story: IChoiceStory }>
+    ) => {
+      state.list = state.list.map((theme) => {
+        if (theme.id === action.payload.themeId) {
+          return {
+            ...theme,
+            choiceStoryList:
+              theme.choiceStoryList.length < 10
+                ? [...theme.choiceStoryList, action.payload.story]
+                : [...theme.choiceStoryList.slice(1), action.payload.story],
+          };
+        } else {
+          return theme;
+        }
+      });
+    },
   },
 });
 
@@ -161,5 +179,6 @@ export const {
   showOverlay,
   hideOverlay,
   setChoiceThemeIsEditing,
+  updateChoiceStory,
 } = appSlice.actions;
 export default appSlice.reducer;

@@ -5,6 +5,12 @@ export interface IChoiceThemeData {
   color: "theme1" | "theme2" | "theme3";
   isEditing: boolean;
   list: IChoice[];
+  choiceStoryList: IChoiceStory[];
+}
+
+export interface IChoiceStory {
+  date: number;
+  options: IChoice[];
 }
 
 export interface IChoice {

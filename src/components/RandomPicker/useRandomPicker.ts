@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { IChoice } from "../../types/types";
+import { IChoice, IChoiceStory } from "../../types/types";
 import { shuffleArray } from "../../helpers/appUtils";
+import { useAppDispatch } from "../../store/hooks";
 
 interface IUseRandomPicker {
   choiceList: IChoice[];
+  storyUpdateHandler?: (arg: IChoiceStory) => void;
 }
 interface IUseRandomPickerProps {
   handleRandomChoice: (arg: number) => void;
@@ -14,6 +16,7 @@ interface IUseRandomPickerProps {
 
 const useRandomPicker = ({
   choiceList,
+  storyUpdateHandler
 }: IUseRandomPicker): IUseRandomPickerProps => {
   const [randomChoiceList, setRandomChiceList] = useState<IChoice[]>([]);
 
@@ -22,19 +25,16 @@ const useRandomPicker = ({
   const activeChoiceList = choiceList.filter((entry) => entry.isActive);
 
   const getRandomChoices = (n: number) => {
-    return shuffleArray(activeChoiceList).slice(
-      0,
-      n
-    );
+    return shuffleArray(activeChoiceList).slice(0, n);
   };
-
-
 
   const handleRandomChoice = (n: number) => {
     if (!isProcessing) {
       setisProcessing(true);
       setTimeout(() => {
-        setRandomChiceList(getRandomChoices(n));
+        const randomChoicesList = getRandomChoices(n);
+        storyUpdateHandler !== undefined && storyUpdateHandler({date: 0, options: randomChoicesList})
+        setRandomChiceList(randomChoicesList);
         setisProcessing(false);
       }, 700);
     }
