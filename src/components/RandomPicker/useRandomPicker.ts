@@ -33,7 +33,7 @@ const useRandomPicker = ({
       setisProcessing(true);
       setTimeout(() => {
         const randomChoicesList = getRandomChoices(n);
-        storyUpdateHandler !== undefined && storyUpdateHandler({date: 0, options: randomChoicesList})
+        storyUpdateHandler !== undefined && storyUpdateHandler({date: (new Date()).getTime(), options: randomChoicesList})
         setRandomChiceList(randomChoicesList);
         setisProcessing(false);
       }, 700);

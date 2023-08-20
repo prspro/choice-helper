@@ -15,6 +15,7 @@ const ChoicePage: FC<IChoicePageProps> = () => {
       <h1>{name}</h1>
       <GridList>
         <GridItem>
+          <h2>Choice list</h2>
           <ChoiceList
             handleToggleisActive={toggleIsActiveItem}
             isEditable={true}
@@ -22,16 +23,19 @@ const ChoicePage: FC<IChoicePageProps> = () => {
           />
         </GridItem>
         <GridItem>
+          <h2>Random Picker</h2>
           <RandomPicker
             storyUpdateHandler={updateChoiceHistory}
             choiceList={list}
           />
         </GridItem>
         <GridItem>
-          <ul>
+          <h2>Previous choices</h2>
+          <ul className="choice-list">
             {storyData.map((entry, idx) => (
-              <li key={idx}>
-                {entry.options.reduce((accum, curr) => accum + curr.value, "")}
+              <li className="choice-list__item active" key={idx}>
+                <p className="choice-list__value">{entry.date}</p>
+                <p className="choice-list__value">{entry.options}</p>
               </li>
             ))}
           </ul>
